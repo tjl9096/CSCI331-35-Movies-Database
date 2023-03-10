@@ -3,8 +3,6 @@ import psycopg2;
 # <username>
 # <password>
 
-#Daniel
-
 # open credential file and read credentials
 f = open(".credentials", "r")
 

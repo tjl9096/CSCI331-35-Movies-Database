@@ -24,4 +24,4 @@ connection.autocommit = False
 # get a cursor object
 cursor = connection.cursor() 
 
-
+edit

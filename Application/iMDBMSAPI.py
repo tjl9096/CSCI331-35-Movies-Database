@@ -68,6 +68,7 @@ def runCommand(conn, curs):
     command = split_line[0].lower()
     args = [arg.lower() for arg in split_line[1:]]
 
+
     # ============== QUICK START INFO ==========================
     #
     # call your functions using the switch statment below, 
@@ -85,6 +86,8 @@ def runCommand(conn, curs):
 
     match command:
         # add your commands here
+        case 'getuser':
+            getUser(conn, curs, args)
         case 'list':
             displayCommands()
         case 'help':
@@ -108,7 +111,7 @@ def displayUsage():
 def displayCommands():
     displayUsage()
     print('---------- Commands ----------')
-
+    getUserUsage()
     # add more commands here
     print()
 

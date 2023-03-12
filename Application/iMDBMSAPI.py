@@ -13,6 +13,11 @@ from UserCommands import *
 
 # connects to the server and runs commands 
 def main():
+    f = open('Scripts/.credentials', "r")
+
+    username = f.readline().replace("\n", "")
+    password = f.readline()
+    
     try:
         with SSHTunnelForwarder(('starbug.cs.rit.edu', 22),
                                 ssh_username=username,

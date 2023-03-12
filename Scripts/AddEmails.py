@@ -11,6 +11,20 @@ f = open('Scripts/.credentials', "r")
 username = f.readline().replace("\n", "")
 password = f.readline()
 
+def getRandomEmails(user_id, user_username, num_emails):
+    emailEndings = ["@gmail.com", "@yahoo.com", "@outlook.com", "@email.com", "@post.com", "@usa.com"]
+    val = ''
+    for i in range(num_emails):
+        val = val + "("
+        val = val + str(user_id) + ', '
+        choice = random.choice(emailEndings)
+        emailEndings.remove(choice)
+        val = val + '\'' + str(user_username) + choice + '\'' + ')'
+        if i + 1 != num_emails:
+            val = val + ', '
+    return val
+
+
 try:
     with SSHTunnelForwarder(('starbug.cs.rit.edu', 22),
                             ssh_username=username,
@@ -33,9 +47,14 @@ try:
         with open("Scripts/UserMockData.csv", "r") as dataFile:
             for line in dataFile:
                 splitLine = line.split(",")
-                if(splitLine[1] < splitLine[6]): 
-                    splitLine[1] = splitLine[6]
-                curs.execute(f'INSERT INTO \"User\"(user_id, last_access_date, username, password, first_name, last_name, creation_date) VALUES ({splitLine[0]}, \'{splitLine[1]}\', \'{splitLine[2]}\', \'{splitLine[3]}\', \'{splitLine[4]}\', \'{splitLine[5]}\', \'{splitLine[6]}\')')
+                user_id = splitLine[0]
+                user_username = splitLine[2]
+                
+                # User has a 1/5 chance of not having any emails 
+                num_emails = random.randint(0, 4)
+
+                if(num_emails != 0):
+                    curs.execute(f'INSERT INTO \"Email\" (user_id, email) VALUES {getRandomEmails(user_id, user_username, num_emails)}')
 
         print("Successful inserted")
         conn.commit()
@@ -45,5 +64,4 @@ except Exception as exception:
     print(exception)
 
 
-getRandomEmail(username):
-    emailEndings = ["@gmail.com", "@yahoo.com", "@outlook.com", "@email.com", "@post.com", "@usa.com", ""]
+

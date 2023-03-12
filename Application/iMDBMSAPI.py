@@ -87,9 +87,15 @@ def runCommand(conn, curs):
     match command:
         # add your commands here
         case 'login':
-            login(curs, args)
+            login(curs, conn)
+        case 'create_account':
+            createAccount(curs, conn)
+        case 'createaccount':
+            createAccount(curs, conn)
+        case 'get_user':
+            getUser(curs)
         case 'getuser':
-            getUser(curs, args)
+            getUser(curs)
         case 'list':
             displayCommands()
         case 'help':
@@ -113,7 +119,9 @@ def displayUsage():
 def displayCommands():
     displayUsage()
     print('---------- Commands ----------')
-    getUserUsage()
+    print('get_user')
+    print('login')
+    print('create_account')
     loginUsage()
     # add more commands here
     print()

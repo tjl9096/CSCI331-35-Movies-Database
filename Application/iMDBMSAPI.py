@@ -66,7 +66,7 @@ def runCommand(conn, curs):
     # parse the input
     # convert everything to lowercase 
     command = split_line[0].lower()
-    args = [arg.lower() for arg in split_line[1:]]
+    args = split_line[1:]
 
 
     # ============== QUICK START INFO ==========================
@@ -78,7 +78,7 @@ def runCommand(conn, curs):
     # conn - used to execute SQL commands
     # curs - used to execute SQL commands 
     # command - the command typed in by the user (lowercase)
-    # args - a string array of args typed by the user (lowercase)
+    # args - a string array of args typed by the user
 
     # =============== STUDENT CODE BLOCK STARTS HERE ============
     # =============== (obviously im joking) =====================
@@ -86,8 +86,10 @@ def runCommand(conn, curs):
 
     match command:
         # add your commands here
+        case 'login':
+            login(curs, args)
         case 'getuser':
-            getUser(conn, curs, args)
+            getUser(curs, args)
         case 'list':
             displayCommands()
         case 'help':
@@ -112,6 +114,7 @@ def displayCommands():
     displayUsage()
     print('---------- Commands ----------')
     getUserUsage()
+    loginUsage()
     # add more commands here
     print()
 

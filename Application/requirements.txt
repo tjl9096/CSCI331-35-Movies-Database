@@ -1,4 +1,4 @@
-- Users will be able to create new accounts and access via login. The system 
+- (done) Users will be able to create new accounts and access via login. The system 
 must record the date and time an account is created. It must also store the 
 dates and times users access the application.
 
@@ -29,6 +29,6 @@ collection
 You must record every time a movie is played by a user. You do not need to 
 actually be able to play movies, simply mark them as played
 
-- Users can follow a friend. Users can search for new friends by email
+- (done) Users can follow a friend. Users can search for new friends by email
 
-- The application must also allow an user to unfollow a friend
+- (done) The application must also allow an user to unfollow a friend

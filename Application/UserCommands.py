@@ -83,3 +83,9 @@ def createAccount(curs, conn):
 
     curs.execute(f'INSERT INTO \"User\"(user_id, last_access_date, username, password, first_name, last_name, creation_date) VALUES ({str(currentUser.user_id)}, \'{currentUser.last_access_date}\', \'{currentUser.username}\', \'{currentUser.password}\', \'{currentUser.first_name}\', \'{currentUser.last_name}\', \'{currentUser.creation_date}\')')
     conn.commit()
+
+
+def findFriends(curs, conn):
+    sqlCommand = 'SELECT user_id,  FROM \"User\" WHERE username = \'' + str(user_username) + '\' and password = \'' + str(user_password) +'\''
+    curs.execute(sqlCommand)
+    result = curs.fetchall()

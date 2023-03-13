@@ -85,7 +85,21 @@ def createAccount(curs, conn):
     conn.commit()
 
 
-def findFriends(curs, conn):
-    sqlCommand = 'SELECT user_id,  FROM \"User\" WHERE username = \'' + str(user_username) + '\' and password = \'' + str(user_password) +'\''
-    curs.execute(sqlCommand)
-    result = curs.fetchall()
+def searchFriends(curs):
+    result = []
+
+    while len(result) == 0:
+        email_search = input('search by email: ')
+
+        curs.execute(f'SELECT user_id, username, first_name, last_name from "User" where user_id in (SELECT user_id FROM "Email" WHERE email like \'%{email_search}%\')')
+        result = curs.fetchall()
+
+        if(len(result) == 0):
+            print('no users with that email found')
+        else:
+            break
+    print('username | firstname | lastname')
+    print('-------------------------------')
+    for res in result:
+        print(res[1], '|', res[2], '|' , res[3])
+    print('-------------------------------')

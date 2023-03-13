@@ -1,2 +1,3 @@
 Database/
 .credentials
+__pycache__/

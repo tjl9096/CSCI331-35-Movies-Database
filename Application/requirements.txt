@@ -1,0 +1,34 @@
+- (done) Users will be able to create new accounts and access via login. The system 
+must record the date and time an account is created. It must also store the 
+dates and times users access the application.
+
+- Users will be able to create collections of movies.
+
+- Users will be to see the list of all their collections by name in ascending 
+order. The list must show the following information per collection:
+    - Collection's name
+    - Number of movies in the collection
+    - Total length of the movies (in hours:minutes) of movies in the collection
+
+- Users will be able to search for movies by name, release date, cast members, 
+studio, and genre. The resulting list of movies must show the movie's name, the 
+cast members, the director, the length and the ratings (MPAA and user). The 
+list must be sorted alphabetically (ascending) by movie's name and release date.
+
+- Users can sort by: movie name, studio, genre, and released year. Results can 
+be as-cending and descending.
+
+- Users can add and delete movies from their collection
+
+- Users can modify the name of a collection. They can also delete an entire 
+collection
+
+- Users can rate a movie (star rating)
+
+- Users can watch a movie individually or they can play an entire collection. 
+You must record every time a movie is played by a user. You do not need to 
+actually be able to play movies, simply mark them as played
+
+- (done) Users can follow a friend. Users can search for new friends by email
+
+- (done) The application must also allow an user to unfollow a friend

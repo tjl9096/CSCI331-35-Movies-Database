@@ -1,0 +1,26 @@
+genre_id,genre_name
+1,Action
+2,Adventure
+3,Animation
+4,Comedy
+5,Crime
+6,Documentary
+7,Drama
+8,Fantasy
+9,Family
+10,History
+11,Horror
+12,Music
+13,Mystery
+14,Romance
+15,Science Fiction
+16,Thriller
+17,War
+18,Western
+19,Superhero
+20,Suspense
+21,Animation/Comedy
+22,Action/Adventure
+23,Drama/Romance
+24,Action/Comedy
+25,Science Fiction/Fantasy

@@ -1,101 +1,101 @@
 movie_id,title,length,release_date,mpaa_rating
-1,tempor convallis nulla neque,213,1920-08-19,R
-2,viverra dapibus nulla,145,1961-07-16,R
-3,venenatis non,104,2010-02-11,PG
-4,euismod,173,1901-03-24,G
-5,elementum nullam,57,1990-08-12,PG-13
-6,ut,195,2006-01-12,NC-17
-7,est lacinia nisi venenatis tristique,296,1994-05-12,NC-17
-8,at vulputate vitae nisl,235,1920-03-20,PG
-9,ante vel ipsum praesent blandit,81,2006-05-14,PG
-10,dolor sit amet consectetuer,291,1959-01-09,PG-13
-11,aenean auctor gravida sem,66,1987-12-17,G
-12,sapien,69,1947-12-03,PG
-13,egestas metus aenean fermentum donec,114,2018-04-08,PG-13
-14,sem fusce consequat,288,1987-06-24,G
-15,erat quisque erat eros,183,1990-08-26,R
-16,amet sapien dignissim,252,1915-06-18,PG
-17,donec semper sapien,268,1948-12-08,R
-18,ut erat curabitur gravida nisi,185,1961-09-15,G
-19,nam congue risus semper,144,1922-04-21,G
-20,molestie,27,1989-03-01,PG
-21,ut rhoncus aliquet pulvinar,52,1969-02-27,R
-22,pede morbi porttitor lorem,65,2017-05-24,PG
-23,at,213,1912-07-12,NC-17
-24,odio,226,1915-07-26,PG
-25,viverra dapibus,253,1971-07-03,G
-26,consectetuer adipiscing elit proin interdum,14,1929-11-01,R
-27,aliquet pulvinar sed,76,1939-01-09,G
-28,donec,227,2022-06-13,NC-17
-29,dui,29,1957-03-19,R
-30,sodales scelerisque,46,1923-07-10,R
-31,dapibus dolor vel,79,1933-03-24,PG-13
-32,aliquet maecenas leo odio,123,1972-06-20,NC-17
-33,luctus et ultrices posuere,112,1977-02-23,G
-34,convallis nunc proin at,102,1939-09-18,PG-13
-35,tellus semper interdum,192,2002-01-27,PG-13
-36,sollicitudin vitae consectetuer eget rutrum,29,2019-09-12,PG-13
-37,ut,100,1959-05-21,G
-38,sit amet justo morbi,195,1988-05-15,NC-17
-39,at feugiat non,47,1936-04-25,PG-13
-40,id,102,1963-03-08,PG-13
-41,et magnis dis,115,1961-02-11,PG-13
-42,pretium,192,1950-09-01,R
-43,aliquet ultrices erat tortor sollicitudin,97,1945-03-13,G
-44,dictumst aliquam augue,44,1960-03-03,PG-13
-45,in tempus sit amet sem,241,1903-09-30,G
-46,volutpat convallis,235,2000-05-10,NC-17
-47,erat tortor sollicitudin,279,1934-12-17,R
-48,quam suspendisse,268,2019-05-29,PG-13
-49,non interdum in ante vestibulum,190,1943-03-03,NC-17
-50,nisl duis ac nibh,247,1910-10-01,PG-13
-51,tincidunt eu felis fusce,238,1910-08-27,PG
-52,pulvinar nulla pede,247,1958-01-17,PG
-53,mattis,41,1908-04-03,NC-17
-54,vehicula consequat morbi a,54,2002-04-05,R
-55,adipiscing,39,2022-10-20,R
-56,non velit donec diam,69,1989-11-19,R
-57,id,84,2016-04-06,PG-13
-58,etiam faucibus cursus,265,1939-06-16,NC-17
-59,non quam nec dui luctus,75,1988-03-16,NC-17
-60,pellentesque volutpat dui,194,1925-05-21,R
-61,non mauris,186,2022-03-12,NC-17
-62,volutpat eleifend donec ut dolor,180,1905-02-20,NC-17
-63,hac habitasse platea,245,1968-02-05,PG
-64,nulla tempus,209,1911-12-15,PG
-65,sociis natoque penatibus et,18,1963-03-19,G
-66,sit amet turpis elementum,192,1968-12-18,PG-13
-67,velit donec diam,89,1915-07-29,R
-68,imperdiet nullam orci,241,1973-11-04,NC-17
-69,lobortis,141,1989-02-21,PG-13
-70,ante ipsum,176,2022-03-14,NC-17
-71,neque vestibulum eget vulputate ut,286,1983-09-27,R
-72,libero rutrum,35,2018-09-20,PG
-73,nisl nunc nisl duis,96,1978-10-24,G
-74,turpis nec euismod scelerisque,263,1966-03-16,NC-17
-75,mi,246,1967-03-21,R
-76,ipsum dolor sit amet consectetuer,60,1955-01-23,NC-17
-77,quam,195,1974-05-04,R
-78,cursus id turpis integer aliquet,10,1976-01-25,R
-79,convallis nulla neque libero,34,1951-07-26,R
-80,eget vulputate,196,1958-09-04,PG-13
-81,nulla ultrices aliquet maecenas leo,87,1986-12-11,R
-82,sed,240,1980-02-27,PG-13
-83,fermentum justo nec,107,1912-11-20,R
-84,ultrices vel,276,1916-07-12,R
-85,pede,137,1928-06-18,PG
-86,eu massa,162,1999-12-19,R
-87,iaculis justo,156,1904-02-05,G
-88,amet turpis elementum,153,1992-10-12,G
-89,massa donec dapibus duis,189,2002-03-12,PG-13
-90,morbi,292,2018-12-17,R
-91,ut dolor,116,1974-10-23,NC-17
-92,habitasse,42,1900-05-20,NC-17
-93,nulla sed,103,2007-11-29,PG
-94,semper sapien a,7,1993-10-04,NC-17
-95,eleifend donec ut,286,2022-12-07,G
-96,eu orci mauris lacinia sapien,156,1931-06-27,G
-97,vel ipsum praesent,294,1914-05-12,NC-17
-98,vestibulum sit amet,127,1961-12-31,PG
-99,suspendisse ornare consequat,25,1930-10-13,G
-100,sapien arcu sed augue aliquam,102,2007-02-19,PG-13
+1,Raging Bull,213,8/19/20,R
+2,Blood: The Last Vampire,145,7/16/61,R
+3,Besotted,104,2/11/10,PG
+4,Meeting Evil,173,3/24/01,G
+5,Unfaithful,57,8/12/90,PG-13
+6,Another You,195,1/12/06,NC-17
+7,I Am Trying to Break Your Heart,296,5/12/94,NC-17
+8,"Final Cut, The",235,3/20/20,PG
+9,"Last Seduction II, The",81,5/14/06,PG
+10,"Hatchet for the Honeymoon (Rosso segno della follia, Il)",291,1/9/59,PG-13
+11,Cairo Time,66,12/17/87,G
+12,Sex and Fury (Furyô anego den: Inoshika Ochô),69,12/3/47,PG
+13,House on Haunted Hill,114,4/8/18,PG-13
+14,Sahara,288,6/24/87,G
+15,The Big Sleep,183,8/26/90,R
+16,Solo ,252,6/18/15,PG
+17,Cran d'arrêt,268,12/8/48,R
+18,Miss Météo,185,9/15/61,G
+19,"Wind Rises, The (Kaze tachinu)",144,4/21/22,G
+20,Garfield's Pet Force,27,3/1/89,PG
+21,Parked,52,2/27/69,R
+22,Congorama,65,5/24/17,PG
+23,No Where No One (Hich Koja Hich Kas),213,7/12/12,NC-17
+24,America Before Columbus,226,7/26/15,PG
+25,Rumble on the Docks,253,7/3/71,G
+26,"Dead, The",14,11/1/29,R
+27,$5 a Day,76,1/9/39,G
+28,Dominion: Prequel to the Exorcist,227,6/13/22,NC-17
+29,House of Women,29,3/19/57,R
+30,Lethal Weapon 2,46,7/10/23,R
+31,To Paint or Make Love (Peindre ou faire l'amour),79,3/24/33,PG-13
+32,The Savior,123,6/20/72,NC-17
+33,Nothing But the Truth,112,2/23/77,G
+34,"American Affair, An",102,9/18/39,PG-13
+35,"District, The (Nyócker!)",192,1/27/02,PG-13
+36,See No Evil,29,9/12/19,PG-13
+37,Snow White,100,5/21/59,G
+38,Kiss and Tell,195,5/15/88,NC-17
+39,My Wife Is a Gangster 2 (Jopog manura 2: Dolaon jeonseol),47,4/25/36,PG-13
+40,Raw Deal: A Question of Consent,102,3/8/63,PG-13
+41,"Uninvited, The",115,2/11/61,PG-13
+42,Hotel Reserve,192,9/1/50,R
+43,Gagarin: First in Space,97,3/13/45,G
+44,Madonna of the Seven Moons,44,3/3/60,PG-13
+45,Lady of Burlesque,241,9/30/03,G
+46,The Disappeared,235,5/10/00,NC-17
+47,"Geographer Drank His Globe Away, The (Geograf globus propil)",279,12/17/34,R
+48,"Gingerbread Man, The",268,5/29/19,PG-13
+49,The Crown Jewels,190,3/3/43,NC-17
+50,Battles Without Honor & Humanity (Jingi naki tatakai),247,10/1/10,PG-13
+51,The Secret of Dr. Kildare,238,8/27/10,PG
+52,Jodhaa Akbar,247,1/17/58,PG
+53,Forbidden Door (Pintu Terlarang),41,4/3/08,NC-17
+54,"City of Your Final Destination, The",54,4/5/02,R
+55,Natural City,39,10/20/22,R
+56,Apartment 4E ,69,11/19/89,R
+57,"Chalk Garden, The",84,4/6/16,PG-13
+58,"Descent: Part 2, The",265,6/16/39,NC-17
+59,Stigmata,75,3/16/88,NC-17
+60,"Kuroneko (Black Cat from the Grove, The) (Yabu no naka no kuroneko)",194,5/21/25,R
+61,"Sky Crawlers, The (Sukai kurora)",186,3/12/22,NC-17
+62,Zatoichi Meets Yojimbo (Zatôichi to Yôjinbô) (Zatôichi 20),180,2/20/05,NC-17
+63,Chennai Express,245,2/5/68,PG
+64,La Bande du drugstore,209,12/15/11,PG
+65,Back In Action,18,3/19/63,G
+66,Tis kakomoiras,192,12/18/68,PG-13
+67,I Wish (Kiseki),89,7/29/15,R
+68,Cool Hand Luke,241,11/4/73,NC-17
+69,Children of the Corn IV: The Gathering,141,2/21/89,PG-13
+70,"Girl He Left Behind, The",176,3/14/22,NC-17
+71,Spontaneous Combustion,286,9/27/83,R
+72,"On Guard (Bossu, Le)",35,9/20/18,PG
+73,The Mask You Live In,96,10/24/78,G
+74,Cheech & Chong's The Corsican Brothers,263,3/16/66,NC-17
+75,Zatoichi's Pilgrimage (Zatôichi umi o wataru) (Zatôichi 14),246,3/21/67,R
+76,Conrack,60,1/23/55,NC-17
+77,9-Jun,195,5/4/74,R
+78,Junebug,10,1/25/76,R
+79,If I Had a Million,34,7/26/51,R
+80,WikiRebels: The Documentary,196,9/4/58,PG-13
+81,Insidious,87,12/11/86,R
+82,"Locusts, The",240,2/27/80,PG-13
+83,Perfumed Nightmare,107,11/20/12,R
+84,Oranges and Sunshine,276,7/12/16,R
+85,Hope Springs,137,6/18/28,PG
+86,Blood: The Last Vampire,162,12/19/99,R
+87,Hudson Hawk,156,2/5/04,G
+88,Fanny,153,10/12/92,G
+89,The Magic Flute,189,3/12/02,PG-13
+90,99 Homes,292,12/17/18,R
+91,"Stepford Wives, The",116,10/23/74,NC-17
+92,"Barber, The",42,5/20/00,NC-17
+93,Angel on My Shoulder,103,11/29/07,PG
+94,Infestation,7,10/4/93,NC-17
+95,Breaking Up,286,12/7/22,G
+96,"Animal Kingdom, The",156,6/27/31,G
+97,"Final Cut, The",294,5/12/14,NC-17
+98,Punksters & Youngsters (Punk - Tauti joka ei tapa),127,12/31/61,PG
+99,Skippy,25,10/13/30,G
+100,"Gentlemen Don't Eat Poets (Grotesque, The)",102,2/19/07,PG-13

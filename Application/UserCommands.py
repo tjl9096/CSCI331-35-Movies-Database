@@ -22,7 +22,7 @@ def getUser(curs):
 
 
 def login(curs, conn):
-    
+    global currentUser
     user_username = input('username: ')
     user_password = input('password: ')
 
@@ -42,12 +42,16 @@ def login(curs, conn):
     curs.execute(f'update \"User\" set last_access_date = \'{currentUser.last_access_date}\' where user_id = \'{currentUser.user_id}\'')
     conn.commit()
 
+    print('log in success!')
+
 
 def logout():
+    global currentUser
     currentUser = None
 
 
 def createAccount(curs, conn):
+    global currentUser
     # select a username
     while(True):
         user_username = input('username: ')
@@ -103,3 +107,70 @@ def searchFriends(curs):
     for res in result:
         print(res[1], '|', res[2], '|' , res[3])
     print('-------------------------------')
+
+
+def listFriends(curs):
+    global currentUser
+    if(currentUser == None):
+        print('Please log in to view your friends')
+        return
+
+    result = []
+    curs.execute(f'SELECT user_id, username, first_name, last_name from "User" where user_id in (select friend_id FROM "Friends" WHERE user_id = \'{currentUser.user_id}\')')
+
+    result = curs.fetchall()
+
+    if(len(result) == 0):
+        print('You have no friends.')
+        return
+    
+    print('People who you have friended')
+    print('user_id | username | firstname | lastname')
+    print('-----------------------------------------')
+    for res in result:
+        print(res[0], '|', res[1], '|', res[2], '|' , res[3])
+    print('-----------------------------------------')
+
+
+def listFriendedMe(curs):
+    global currentUser
+    if(currentUser == None):
+        print('Please log in to view who friended you')
+        return
+
+    result = []
+    curs.execute(f'SELECT user_id, username, first_name, last_name from "User" where user_id in (select user_id FROM "Friends" WHERE friend_id = \'{currentUser.user_id}\')')
+
+    result = curs.fetchall()
+
+    if(len(result) == 0):
+        print('No one has friended you.')
+        return
+    
+    print('People who have friended you')
+    print('user_id | username | firstname | lastname')
+    print('-----------------------------------------')
+    for res in result:
+        print(res[0], '|', res[1], '|', res[2], '|' , res[3])
+    print('-----------------------------------------')
+
+
+def addFriend(curs, conn):
+    global currentUser
+    if(currentUser == None):
+        print('Please log in to friend someone')
+        return
+    unfriend_id = input('friend id to unfriend: ')
+    curs.execute(f'insert into "Friends" (user_id, friend_id) values (\'{currentUser.user_id}\', \'{unfriend_id}\')')
+    conn.commit()
+
+
+def removeFriend(curs, conn):
+    global currentUser
+    if(currentUser == None):
+        print('Please log in to unfriend someone')
+        return
+    unfriend_id = input('friend id to unfriend: ')
+    curs.execute(f'delete from "Friends" WHERE user_id = \'{currentUser.user_id}\' and friend_id = \'{unfriend_id}\'')
+    conn.commit()
+

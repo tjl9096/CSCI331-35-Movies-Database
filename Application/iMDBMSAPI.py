@@ -86,6 +86,26 @@ def runCommand(conn, curs):
 
     match command:
         # add your commands here
+        case 'search_friends':
+            searchFriends(curs)
+        case 'searchFriends':
+            searchFriends(curs)
+        case 'list_friends':
+            listFriends(curs)
+        case 'listfriends':
+            listFriends(curs)
+        case 'list_friended_me':
+            listFriendedMe(curs)
+        case 'listfriendedme':
+            listFriendedMe(curs)
+        case 'add_friend':
+            addFriend(curs, conn)
+        case 'addfriend':
+            addFriend(curs, conn)
+        case 'remove_friend':
+            removeFriend(curs, conn)
+        case 'removefriend':
+            removeFriend(curs, conn)
         case 'get_user':
             getUser(curs)
         case 'getuser':
@@ -106,6 +126,12 @@ def runCommand(conn, curs):
             displayUsage()
         case 'stop':
             return 'stop' 
+        case 'quit':
+            return 'stop'
+        case 's':
+            return 'stop'
+        case 'q':
+            return 'stop'
         # default 
         case _:
             displayUsage()
@@ -114,15 +140,20 @@ def runCommand(conn, curs):
 
 
 def displayUsage():
-    print('Usage: [command] [arg1] [arg2] [...]')
-    print('list shows all functions')
-    print('stop will stop the program')
+    print('Usage: [command]')
+    print('command "list" shows all functions')
+    print('command "stop" will stop the program')
     print()
 
 
 def displayCommands():
     displayUsage()
     print('---------- Commands ----------')
+    print('list_friended_me')
+    print('list_friends')
+    print('search_friends')
+    print('add_friend')
+    print('remove_friend')
     print('get_user')
     print('login')
     print('create_account')

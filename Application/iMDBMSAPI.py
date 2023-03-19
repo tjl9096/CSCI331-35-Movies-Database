@@ -129,6 +129,26 @@ def runCommand(conn, curs):
             listCollections(curs)
         case 'listcollections':
             listCollections(curs)
+        case 'rename_collection':
+            renameCollection(curs, conn)
+        case 'renamecollection':
+            renameCollection(curs, conn)
+        case 'delete_collection':
+            deleteCollection(curs, conn)
+        case 'deletecollection':
+            deleteCollection(curs, conn)
+        case 'view_collection':
+            viewCollection(curs)
+        case 'viewcollection':
+            viewCollection(curs)
+        case 'add_movie_to_collection':
+            addMovieToCollection(curs, conn)
+        case 'addmovietocollection':
+            addMovieToCollection(curs, conn)
+        case 'remove_movie_from_collection':
+            removeMovieFromCollection(curs, conn)
+        case 'removemoviefromcollection':
+            removeMovieFromCollection(curs, conn)
         case 'list':
             displayCommands()
         case 'help':
@@ -169,6 +189,11 @@ def displayCommands():
     print('search_friends')
     print('create_collection')
     print('list_collections')
+    print('rename_collection')
+    print('delete_collection')
+    print('view_collection')
+    print('add_movie_to_collection')
+    print('remove_movie_from_collection')
     print('list')
     print('help')
     print('stop')

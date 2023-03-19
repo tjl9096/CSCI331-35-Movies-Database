@@ -4,7 +4,7 @@ dates and times users access the application.
 
 - (done) Users will be able to create collections of movies.
 
-- (done, probably - needs tested with full collection) Users will be to see the list of all their collections by name in ascending 
+- (done) Users will be to see the list of all their collections by name in ascending 
 order. The list must show the following information per collection:
     - Collection's name
     - Number of movies in the collection
@@ -20,7 +20,7 @@ be as-cending and descending.
 
 - Users can add and delete movies from their collection
 
-- Users can modify the name of a collection. They can also delete an entire 
+- (done) Users can modify the name of a collection. They can also delete an entire 
 collection
 
 - Users can rate a movie (star rating)

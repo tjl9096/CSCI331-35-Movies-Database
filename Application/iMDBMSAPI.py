@@ -9,6 +9,7 @@
 import psycopg2
 from sshtunnel import SSHTunnelForwarder
 from UserCommands import *
+from CollectionCommands import *
 
 
 # connects to the server and runs commands 
@@ -88,7 +89,7 @@ def runCommand(conn, curs):
         # add your commands here
         case 'search_friends':
             searchFriends(curs)
-        case 'searchFriends':
+        case 'searchfriends':
             searchFriends(curs)
         case 'list_friends':
             listFriends(curs)
@@ -120,6 +121,14 @@ def runCommand(conn, curs):
             searchFriends(curs)
         case 'searchfriends':
             searchFriends(curs)
+        case 'create_collection':
+            createCollection(curs, conn)
+        case 'createcollection':
+            createCollection(curs, conn)
+        case 'list_collections':
+            listCollections(curs)
+        case 'listcollections':
+            listCollections(curs)
         case 'list':
             displayCommands()
         case 'help':
@@ -158,6 +167,8 @@ def displayCommands():
     print('login')
     print('create_account')
     print('search_friends')
+    print('create_collection')
+    print('list_collections')
     print('list')
     print('help')
     print('stop')

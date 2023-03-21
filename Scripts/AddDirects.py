@@ -31,7 +31,7 @@ try:
         conn = psycopg2.connect(**params)
         curs = conn.cursor()
         print("Database connection established")
-        with open("Scripts/ContributorMockData.csv", "r") as dataFile:
+        with open("Scripts/DirectsMockData.csv", "r") as dataFile:
             next(dataFile)
             for line in dataFile:
                 line = line.strip()   # added
@@ -42,14 +42,14 @@ try:
                 print(splitLine)
                 # splitLine = shlex.split(line)
                 # print(splitLine)
-                contributor_id = splitLine[0]
-                name = splitLine[1]
+                movie_id = splitLine[0]
+                contributor_id = splitLine[1]
                 
                 # if(splitLine[1] < splitLine[4]):      # removed
                     # splitLine[1] = splitLine[4]       # removed
                 # curs.execute(f"INSERT INTO \"Movie\"(movie_id, title, length, release_date, mpaa_rating) VALUES ({movie_id}, \'{title}\', \'{length}\', \'{release_date}\', \'{mpaa_rating}\')")
-                sql = "INSERT INTO \"Contributor\" (contributor_id, name) VALUES (%s, %s)"
-                val = (contributor_id, name)
+                sql = "INSERT INTO \"Directs\" (movie_id, contributor_id) VALUES (%s, %s)"
+                val = (movie_id, contributor_id)
                 curs.execute(sql, val)
 
         print("Successful inserted")

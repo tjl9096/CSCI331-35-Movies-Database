@@ -160,8 +160,8 @@ def addFriend(curs, conn):
     if(currentUser == None):
         print('Please log in to friend someone')
         return
-    unfriend_id = input('friend id to unfriend: ')
-    curs.execute(f'insert into "Friends" (user_id, friend_id) values (\'{currentUser.user_id}\', \'{unfriend_id}\')')
+    friend_id = input('friend id to friend: ')
+    curs.execute(f'insert into "Friends" (user_id, friend_id) values (\'{currentUser.user_id}\', \'{friend_id}\')')
     conn.commit()
 
 

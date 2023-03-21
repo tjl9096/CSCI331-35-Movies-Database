@@ -74,7 +74,7 @@ def renameCollection(curs, conn):
         new_name = new_name[0:49]
         print('Name was too long, reduced to 50 characters')
 
-    curs.execute('UPDATE \"Collection\" set name = \''  + new_name + '\' WHERE user_id = + ' + str(currentUser.user_id) + ' AND collection_id = ' + str(collection_id))
+    curs.execute('UPDATE \"Collection\" set name = \''  + new_name + '\' WHERE user_id = ' + str(currentUser.user_id) + ' AND collection_id = ' + str(collection_id))
     conn.commit()
 
 def deleteCollection(curs, conn):

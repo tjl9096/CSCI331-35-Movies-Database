@@ -43,7 +43,7 @@ try:
             date = date_obj.strftime("%Y-%m-%d")
             user_id = random.randint(1, 100)
             movie_id = random.randint(1, 100)
-            rating = random.randint(0,5)
+            rating = random.randint(1,5)
             curs.execute(f'INSERT INTO \"Rates\"(user_id, movie_id, rating, date) VALUES {user_id, movie_id, rating, date}')
 
         print("Successful inserted")

@@ -10,6 +10,7 @@ import psycopg2
 from sshtunnel import SSHTunnelForwarder
 from UserCommands import *
 from CollectionCommands import *
+from RatingCommands import *
 
 
 # connects to the server and runs commands 
@@ -149,6 +150,10 @@ def runCommand(conn, curs):
             removeMovieFromCollection(curs, conn)
         case 'removemoviefromcollection':
             removeMovieFromCollection(curs, conn)
+        case 'rate_movie':
+            rateMovie(curs, conn)
+        case 'ratemovie':
+            rateMovie(curs, conn)
         case 'list':
             displayCommands()
         case 'help':
@@ -194,6 +199,7 @@ def displayCommands():
     print('view_collection')
     print('add_movie_to_collection')
     print('remove_movie_from_collection')
+    print('rate_movie')
     print('list')
     print('help')
     print('stop')

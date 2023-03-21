@@ -48,6 +48,7 @@ def login(curs, conn):
 def logout():
     global currentUser
     currentUser = None
+    print('log out success!')
 
 
 def createAccount(curs, conn):
@@ -87,6 +88,7 @@ def createAccount(curs, conn):
 
     curs.execute(f'INSERT INTO \"User\"(user_id, last_access_date, username, password, first_name, last_name, creation_date) VALUES ({str(currentUser.user_id)}, \'{currentUser.last_access_date}\', \'{currentUser.username}\', \'{currentUser.password}\', \'{currentUser.first_name}\', \'{currentUser.last_name}\', \'{currentUser.creation_date}\')')
     conn.commit()
+    print('create account success!')
 
 
 def searchFriends(curs):
@@ -163,6 +165,7 @@ def addFriend(curs, conn):
     friend_id = input('friend id to friend: ')
     curs.execute(f'insert into "Friends" (user_id, friend_id) values (\'{currentUser.user_id}\', \'{friend_id}\')')
     conn.commit()
+    print('friend added!')
 
 
 def removeFriend(curs, conn):
@@ -173,4 +176,5 @@ def removeFriend(curs, conn):
     unfriend_id = input('friend id to unfriend: ')
     curs.execute(f'delete from "Friends" WHERE user_id = \'{currentUser.user_id}\' and friend_id = \'{unfriend_id}\'')
     conn.commit()
+    print('friend removed!')
 

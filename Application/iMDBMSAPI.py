@@ -114,6 +114,8 @@ def runCommand(conn, curs):
             getUser(curs)
         case 'login':
             login(curs, conn)
+        case 'logout':
+            logout()
         case 'create_account':
             createAccount(curs, conn)
         case 'createaccount':

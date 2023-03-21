@@ -1,0 +1,87 @@
+This file will be used for our demo to show that the application
+meets the requirements for this part of the project. 
+
+
+Requirement: Users will be able to create new accounts. The system 
+             must record the date and time an account is created.
+
+Commands:
+             create_account
+             test_username
+             test_password
+             test_password
+             test_firstname
+             test_lastname
+             logout
+             
+
+Requirement: Access via login. The system must record dates and 
+             times users access the application.
+             
+Commands:
+             login 
+             ryan_current
+             123
+
+
+Requirement: Users can search for new friends by email
+
+Commands:
+             search_friends
+             dnarra
+
+Requirement: Users can follow a friend. 
+
+Commands:
+             add_friend
+             1
+             list_friends
+
+
+Requirement: The application must also allow an user to unfollow a friend
+
+Commands:
+             remove_friend 
+             1
+             list_friends
+
+
+Requirement: Users will be able to search for movies by name, release 
+             date, cast members, studio, and genre. The resulting list 
+             shows the movie's name, the cast members, the director, 
+             the length, and the ratings (MPAA and user). The list must 
+             be sorted alphabetically (ascending) by movie's name and 
+             release date.
+
+
+Requirement: Users can sort by: movie name, studio, genre, and released 
+             year. Results can be as-cending and descending.             
+
+
+Requirement: Users will be able to create collections of movies.
+
+
+Requirement: Users will be to see the list of all their collections
+             by name in ascending order. The list shows Collection's 
+             name, number of movies in the collection and total length 
+             of the movies (in hours:minutes) in the collection
+
+
+Requirement: Users can add and delete movies from their collection
+
+
+Requirement: Users can modify the name of a collection. 
+
+
+Requirement: Users can delete an entire collection
+
+
+Requirement: Users can rate a movie (star rating)
+
+
+Requirement: Users can watch a movie individually 
+
+
+Requirement: Users can watch/play an entire collection. 
+
+

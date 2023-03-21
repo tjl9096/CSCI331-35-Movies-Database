@@ -2,6 +2,11 @@ import UserCommands
 
 def createCollection(curs, conn):
     currentUser = UserCommands.currentUser
+
+    if (currentUser == None):
+        print("Please log in to create a collection")
+        return
+    
     collection_name = input('Collection name: ')
 
     curs.execute('SELECT max(collection_id) FROM \"Collection\"')
@@ -13,6 +18,10 @@ def createCollection(curs, conn):
 
 def listCollections(curs):
     currentUser = UserCommands.currentUser
+
+    if (currentUser == None):
+        print("Please log in to list your collections")
+        return
     
     curs.execute('SELECT user_id, collection_id, name FROM \"Collection\" WHERE user_id = ' + str(currentUser.user_id) + ' ORDER BY name ASC')
     result = curs.fetchall()
@@ -45,6 +54,11 @@ def listCollections(curs):
 
 def renameCollection(curs, conn):
     currentUser = UserCommands.currentUser
+
+    if (currentUser == None):
+            print("Please log in to modify your collections")
+            return
+
     collection_id = input('Enter the id of the collection you want to rename: ')
 
     curs.execute(f'SELECT name from \"Collection\" WHERE user_id = ' + str(currentUser.user_id) + ' AND collection_id = ' + str(collection_id))
@@ -65,6 +79,11 @@ def renameCollection(curs, conn):
 
 def deleteCollection(curs, conn):
     currentUser = UserCommands.currentUser
+
+    if (currentUser == None):
+            print("Please log in to modify your collections")
+            return
+
     collection_id = input('Enter the id of the collection you want to delete: ')
 
     curs.execute(f'SELECT name from \"Collection\" WHERE user_id = ' + str(currentUser.user_id) + ' AND collection_id = ' + str(collection_id))
@@ -81,6 +100,11 @@ def deleteCollection(curs, conn):
 
 def viewCollection(curs):
     currentUser = UserCommands.currentUser
+
+    if (currentUser == None):
+            print("Please log in to view a collection")
+            return
+
     collection_id = input('Enter the id of the collection you want to view: ')
 
     curs.execute(f'SELECT name from \"Collection\" WHERE user_id = ' + str(currentUser.user_id) + ' AND collection_id = ' + str(collection_id))
@@ -107,6 +131,11 @@ def viewCollection(curs):
 
 def addMovieToCollection(curs, conn):
     currentUser = UserCommands.currentUser
+
+    if (currentUser == None):
+                print("Please log in to modify your collections")
+                return
+
     collection_id = input('Enter the id of the collection you want to add a movie to: ')
 
     curs.execute(f'SELECT name from \"Collection\" WHERE user_id = ' + str(currentUser.user_id) + ' AND collection_id = ' + str(collection_id))
@@ -136,6 +165,11 @@ def addMovieToCollection(curs, conn):
 
 def removeMovieFromCollection(curs, conn):
     currentUser = UserCommands.currentUser
+
+    if (currentUser == None):
+            print("Please log in to modify your collections")
+            return
+
     collection_id = input('Enter the id of the collection you want to remove a movie from: ')
 
     curs.execute(f'SELECT name from \"Collection\" WHERE user_id = ' + str(currentUser.user_id) + ' AND collection_id = ' + str(collection_id))

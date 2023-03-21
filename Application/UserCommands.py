@@ -102,11 +102,11 @@ def searchFriends(curs):
             print('no users with that email found')
         else:
             break
-    print('username | firstname | lastname')
-    print('-------------------------------')
+    print('user_id | username | firstname | lastname')
+    print('-----------------------------------------')
     for res in result:
-        print(res[1], '|', res[2], '|' , res[3])
-    print('-------------------------------')
+        print(res[0], '|', res[1], '|', res[2], '|' , res[3])
+    print('-----------------------------------------')
 
 
 def listFriends(curs):

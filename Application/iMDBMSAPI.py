@@ -86,6 +86,8 @@ def runCommand(conn, curs):
 
     match command:
         # add your commands here
+        case 'search_movies':
+            searchMovie(curs)
         case 'search_friends':
             searchFriends(curs)
         case 'searchFriends':

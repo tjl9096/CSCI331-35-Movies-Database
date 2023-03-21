@@ -1,4 +1,5 @@
 from datetime import date
+import re
 class User:
     def __init__(self, user_id, last_access_date, username, password, first_name, last_name, creation_date):
         self.user_id = user_id
@@ -173,4 +174,57 @@ def removeFriend(curs, conn):
     unfriend_id = input('friend id to unfriend: ')
     curs.execute(f'delete from "Friends" WHERE user_id = \'{currentUser.user_id}\' and friend_id = \'{unfriend_id}\'')
     conn.commit()
+
+def searchMovie(curs):
+    global currentUser
+    if(currentUser == None):
+        print('Please log in to search for movies')
+        return
+      
+    search_field = input('Search a movie by name, release date, cast members, studio, or genre: \n')
+
+
+    dt_format = '%Y-%m-%d'
+    match = re.match(dt_format, search_field)
+    
+    if match:
+        curs.execute(f"""SELECT title, release_date, length, C.name, mpaa_rating
+                FROM "Movie"
+                INNER JOIN "Hosts_On" HO on "Movie".movie_id = HO.movie_id
+                INNER JOIN "Movie_Type" Type on "Movie".movie_id = Type.movie_id
+                INNER JOIN "Genre" on Type.genre_id = "Genre".genre_id
+                INNER JOIN "Release_Platform" RP on HO.platform_id = RP.platform_ID
+                INNER JOIN "Directs" on "Movie".movie_id = "Directs".movie_id
+                FULL OUTER JOIN "Acts" on "Movie".movie_id = "Acts".movie_id
+                INNER JOIN "Contributor" C on "Acts".contributor_id = C.contributor_id
+                    AND "Directs".contributor_id = C.contributor_id
+                WHERE release_date = \'{search_field}\'
+                ORDER BY title ASC, release_date DESC;""")
+        
+    else:
+        search_field = search_field.lower()
+        curs.execute(f"""SELECT title, release_date, length, C.name, mpaa_rating
+                FROM "Movie"
+                INNER JOIN "Hosts_On" HO on "Movie".movie_id = HO.movie_id
+                INNER JOIN "Movie_Type" Type on "Movie".movie_id = Type.movie_id
+                INNER JOIN "Genre" on Type.genre_id = "Genre".genre_id
+                INNER JOIN "Release_Platform" RP on HO.platform_id = RP.platform_ID
+                INNER JOIN "Directs" on "Movie".movie_id = "Directs".movie_id
+                FULL OUTER JOIN "Acts" on "Movie".movie_id = "Acts".movie_id
+                INNER JOIN "Contributor" C on "Acts".contributor_id = C.contributor_id
+                    AND "Directs".contributor_id = C.contributor_id
+                WHERE LOWER(title) LIKE \'%{search_field}\%'
+                    OR LOWER(genre_name) LIKE \'%{search_field}\%'
+                    OR LOWER(platform_name) like \'%{search_field}\%'
+                ORDER BY title ASC, release_date DESC;""")
+
+    result = curs.fetchall()
+
+    print('title | release_date | length | Contributor Name | Rating')
+    print('-----------------------------------------')
+    for res in result:
+        print(res[0], '|', res[1], '|', res[2], '|' , res[3], '|', res[4])
+    print('-----------------------------------------')
+
+
 

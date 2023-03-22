@@ -202,7 +202,7 @@ def searchMovie(curs):
     result = [] 
 
     if search_by == 'release date':
-        curs.execute(f'''SELECT title as Title, Actors.name as Actors, Directors.name as Directors, genre_name as Genre, release_date as "Release Date", Base.length "Length ", mpaa_rating, AVG(rating)
+        curs.execute(f'''SELECT title as Title, Actors.name as Actors, Directors.name as Directors, genre_name as Genre, Base.length "Length ", mpaa_rating, ROUND(AVG(rating),2)
                             FROM ("Movie"
                                 natural join "Hosts_On"
                                 natural join "Movie_Type"
@@ -215,11 +215,11 @@ def searchMovie(curs):
                             left outer join "Acts" on BASE.movie_id = "Acts".movie_id
                             left outer join "Contributor" Actors on "Acts".contributor_id = Actors.contributor_id
                             left outer join "Contributor" Directors on "Directs".contributor_id = Directors.contributor_id
-                            where \'{queryBy}\' = \'{search_field}\'
+                            where {queryBy} = \'{search_field}\'
                             group by title, Actors.name,Directors.name, genre_name, release_date, Base.length, mpaa_rating
                             order by title ASC, release_date DESC;''')         
     else:
-        curs.execute(f'''SELECT title as Title, Actors.name as "Actors", Directors.name as "Directors", genre_name as "Genre", release_date as "Release Date", Base.length "Length ", mpaa_rating, AVG(rating)
+        curs.execute(f'''SELECT title as Title, Actors.name as "Actors", Directors.name as "Directors", genre_name as "Genre", Base.length "Length ", mpaa_rating, ROUND(AVG(rating),2)
                             FROM ("Movie"
                                 natural join "Hosts_On"
                                 natural join "Movie_Type"
@@ -232,16 +232,16 @@ def searchMovie(curs):
                             left outer join "Acts" on BASE.movie_id = "Acts".movie_id
                             left outer join "Contributor" Actors on "Acts".contributor_id = Actors.contributor_id
                             left outer join "Contributor" Directors on "Directs".contributor_id = Directors.contributor_id
-                            where \'{queryBy}\' like \'%{search_field}%\'
+                            where LOWER({queryBy}) like LOWER(\'%{search_field}%\')
                             group by title, Actors.name,Directors.name, genre_name, release_date, Base.length, mpaa_rating
                             order by title ASC, release_date DESC;''')
     
     result = curs.fetchall()
 
-    print('title | release_date | length | Contributor Name | Rating')
+    print('Title | Actors | Directos | Genre | Length | MPAA Rating | Average Rating')
     print('-----------------------------------------')
     for res in result:
-        print(res[0], '|', res[1], '|', res[2], '|' , res[3], '|', res[4])
+        print(res[0], '|', res[1], '|', res[2], '|' , res[3], '|', res[4], '|', res[5], '|', res[6])
     print('-----------------------------------------')
 
 

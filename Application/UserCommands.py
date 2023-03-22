@@ -181,43 +181,61 @@ def searchMovie(curs):
         print('Please log in to search for movies')
         return
       
-    search_field = input('Search a movie by name, release date, cast members, studio, or genre: \n')
+    search_by = input('Search a movie by name, release date, cast members, studio, or genre: \n')
+    search_field = input ('Enter the search term: \n')
+    queryBy = '' 
 
+    match search_by:
+        case 'name':
+            queryBy = 'title'
+        case 'release date':
+            queryBy = 'release_date'
+        case 'cast members':
+            queryBy = 'Actors.name'
+        case 'studio':
+            queryBy = 'Base.platform_name'
+        case 'genre':
+            queryBy = 'Base.genre_name'
+        case _:
+            queryBy = 'title'
 
-    dt_format = '%Y-%m-%d'
-    match = re.match(dt_format, search_field)
-    
-    if match:
-        curs.execute(f"""SELECT title, release_date, length, C.name, mpaa_rating
-                FROM "Movie"
-                INNER JOIN "Hosts_On" HO on "Movie".movie_id = HO.movie_id
-                INNER JOIN "Movie_Type" Type on "Movie".movie_id = Type.movie_id
-                INNER JOIN "Genre" on Type.genre_id = "Genre".genre_id
-                INNER JOIN "Release_Platform" RP on HO.platform_id = RP.platform_ID
-                INNER JOIN "Directs" on "Movie".movie_id = "Directs".movie_id
-                FULL OUTER JOIN "Acts" on "Movie".movie_id = "Acts".movie_id
-                INNER JOIN "Contributor" C on "Acts".contributor_id = C.contributor_id
-                    AND "Directs".contributor_id = C.contributor_id
-                WHERE release_date = \'{search_field}\'
-                ORDER BY title ASC, release_date DESC;""")
-        
+    result = [] 
+
+    if search_by == 'release date':
+        curs.execute(f'''SELECT title as Title, Actors.name as Actors, Directors.name as Directors, genre_name as Genre, release_date as "Release Date", Base.length "Length ", mpaa_rating, AVG(rating)
+                            FROM ("Movie"
+                                natural join "Hosts_On"
+                                natural join "Movie_Type"
+                                natural join "Genre"
+                                natural join "Release_Platform"
+                                )
+                                as BASE
+                            left outer join "Rates" on BASE.movie_id = "Rates".movie_id
+                            left outer join "Directs" on BASE.movie_id = "Directs".movie_id
+                            left outer join "Acts" on BASE.movie_id = "Acts".movie_id
+                            left outer join "Contributor" Actors on "Acts".contributor_id = Actors.contributor_id
+                            left outer join "Contributor" Directors on "Directs".contributor_id = Directors.contributor_id
+                            where \'{queryBy}\' = \'{search_field}\'
+                            group by title, Actors.name,Directors.name, genre_name, release_date, Base.length, mpaa_rating
+                            order by title ASC, release_date DESC;''')         
     else:
-        search_field = search_field.lower()
-        curs.execute(f"""SELECT title, release_date, length, C.name, mpaa_rating
-                FROM "Movie"
-                INNER JOIN "Hosts_On" HO on "Movie".movie_id = HO.movie_id
-                INNER JOIN "Movie_Type" Type on "Movie".movie_id = Type.movie_id
-                INNER JOIN "Genre" on Type.genre_id = "Genre".genre_id
-                INNER JOIN "Release_Platform" RP on HO.platform_id = RP.platform_ID
-                INNER JOIN "Directs" on "Movie".movie_id = "Directs".movie_id
-                FULL OUTER JOIN "Acts" on "Movie".movie_id = "Acts".movie_id
-                INNER JOIN "Contributor" C on "Acts".contributor_id = C.contributor_id
-                    AND "Directs".contributor_id = C.contributor_id
-                WHERE LOWER(title) LIKE \'%{search_field}\%'
-                    OR LOWER(genre_name) LIKE \'%{search_field}\%'
-                    OR LOWER(platform_name) like \'%{search_field}\%'
-                ORDER BY title ASC, release_date DESC;""")
-
+        curs.execute(f'''SELECT title as Title, Actors.name as "Actors", Directors.name as "Directors", genre_name as "Genre", release_date as "Release Date", Base.length "Length ", mpaa_rating, AVG(rating)
+                            FROM ("Movie"
+                                natural join "Hosts_On"
+                                natural join "Movie_Type"
+                                natural join "Genre"
+                                natural join "Release_Platform"
+                                )
+                                as BASE
+                            left outer join "Rates" on BASE.movie_id = "Rates".movie_id
+                            left outer join "Directs" on BASE.movie_id = "Directs".movie_id
+                            left outer join "Acts" on BASE.movie_id = "Acts".movie_id
+                            left outer join "Contributor" Actors on "Acts".contributor_id = Actors.contributor_id
+                            left outer join "Contributor" Directors on "Directs".contributor_id = Directors.contributor_id
+                            where \'{queryBy}\' like \'%{search_field}%\'
+                            group by title, Actors.name,Directors.name, genre_name, release_date, Base.length, mpaa_rating
+                            order by title ASC, release_date DESC;''')
+    
     result = curs.fetchall()
 
     print('title | release_date | length | Contributor Name | Rating')

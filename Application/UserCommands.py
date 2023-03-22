@@ -1,4 +1,5 @@
 from datetime import date
+import re
 class User:
     def __init__(self, user_id, last_access_date, username, password, first_name, last_name, creation_date):
         self.user_id = user_id
@@ -178,3 +179,136 @@ def removeFriend(curs, conn):
     conn.commit()
     print('friend removed!')
 
+def searchMovie(curs):
+    global currentUser
+    if(currentUser == None):
+        print('Please log in to search for movies')
+        return
+      
+    search_by = input('Search a movie by name, release date, cast members, studio, or genre: \n')
+    search_field = input ('Enter the search term: \n')
+    queryBy = '' 
+
+    match search_by:
+        case 'name':
+            queryBy = 'title'
+        case 'release date':
+            queryBy = 'release_date'
+        case 'cast members':
+            queryBy = 'Actors.name'
+        case 'studio':
+            queryBy = 'Base.platform_name'
+        case 'genre':
+            queryBy = 'Base.genre_name'
+        case _:
+            queryBy = 'title'
+
+    result = [] 
+
+    if search_by == 'release date':
+        curs.execute(f'''SELECT title as Title, Actors.name as Actors, Directors.name as Directors, genre_name as Genre, Base.length "Length ", mpaa_rating, ROUND(AVG(rating),2)
+                            FROM ("Movie"
+                                natural join "Hosts_On"
+                                natural join "Movie_Type"
+                                natural join "Genre"
+                                natural join "Release_Platform"
+                                )
+                                as BASE
+                            left outer join "Rates" on BASE.movie_id = "Rates".movie_id
+                            left outer join "Directs" on BASE.movie_id = "Directs".movie_id
+                            left outer join "Acts" on BASE.movie_id = "Acts".movie_id
+                            left outer join "Contributor" Actors on "Acts".contributor_id = Actors.contributor_id
+                            left outer join "Contributor" Directors on "Directs".contributor_id = Directors.contributor_id
+                            where {queryBy} = \'{search_field}\'
+                            group by title, Actors.name,Directors.name, genre_name, release_date, Base.length, mpaa_rating
+                            order by title ASC, release_date DESC;''')         
+    else:
+        curs.execute(f'''SELECT title as Title, Actors.name as "Actors", Directors.name as "Directors", genre_name as "Genre", Base.length "Length ", mpaa_rating, ROUND(AVG(rating),2)
+                            FROM ("Movie"
+                                natural join "Hosts_On"
+                                natural join "Movie_Type"
+                                natural join "Genre"
+                                natural join "Release_Platform"
+                                )
+                                as BASE
+                            left outer join "Rates" on BASE.movie_id = "Rates".movie_id
+                            left outer join "Directs" on BASE.movie_id = "Directs".movie_id
+                            left outer join "Acts" on BASE.movie_id = "Acts".movie_id
+                            left outer join "Contributor" Actors on "Acts".contributor_id = Actors.contributor_id
+                            left outer join "Contributor" Directors on "Directs".contributor_id = Directors.contributor_id
+                            where LOWER({queryBy}) like LOWER(\'%{search_field}%\')
+                            group by title, Actors.name,Directors.name, genre_name, release_date, Base.length, mpaa_rating
+                            order by title ASC, release_date DESC;''')
+    
+    result = curs.fetchall()
+    displayResults(result)
+
+    sort = input('Would you like to sort the results? (y/n): ')
+    if sort == 'y':
+        sortField = input('Sort by name, release date, genre or studio \n')
+        sortOrder = input('Sort ascending or descending? (a/d) \n')
+            
+        if sortOrder == 'a':
+            sortOrder = 'ASC'
+        else:
+            sortOrder = 'DESC'
+        
+        if sortField == 'name':
+            sortField = 'title'
+        elif sortField == 'release date':
+            sortField = 'release_date'
+        elif sortField == 'genre':
+            sortField = 'BASE.genre_name'
+        elif sortField == 'studio':
+            sortField = 'Base.platform_name'
+        else:
+            sortField = 'title'
+            
+        if search_by == 'release date':
+            curs.execute(f'''SELECT title as Title, Actors.name as Actors, Directors.name as Directors, genre_name as Genre, Base.length "Length ", mpaa_rating, ROUND(AVG(rating),2)
+                                FROM ("Movie"
+                                    natural join "Hosts_On"
+                                    natural join "Movie_Type"
+                                    natural join "Genre"
+                                    natural join "Release_Platform"
+                                    )
+                                    as BASE
+                                left outer join "Rates" on BASE.movie_id = "Rates".movie_id
+                                left outer join "Directs" on BASE.movie_id = "Directs".movie_id
+                                left outer join "Acts" on BASE.movie_id = "Acts".movie_id
+                                left outer join "Contributor" Actors on "Acts".contributor_id = Actors.contributor_id
+                                left outer join "Contributor" Directors on "Directs".contributor_id = Directors.contributor_id
+                                where {queryBy} = \'{search_field}\'
+                                group by title, Actors.name,Directors.name, genre_name, release_date, Base.length, mpaa_rating
+                                order by {sortField} {sortOrder}''')         
+        else:
+            curs.execute(f'''SELECT title as Title, Actors.name as "Actors", Directors.name as "Directors", genre_name as "Genre", Base.length "Length ", mpaa_rating, ROUND(AVG(rating),2)
+                                FROM ("Movie"
+                                    natural join "Hosts_On"
+                                    natural join "Movie_Type"
+                                    natural join "Genre"
+                                    natural join "Release_Platform"
+                                    )
+                                    as BASE
+                                left outer join "Rates" on BASE.movie_id = "Rates".movie_id
+                                left outer join "Directs" on BASE.movie_id = "Directs".movie_id
+                                left outer join "Acts" on BASE.movie_id = "Acts".movie_id
+                                left outer join "Contributor" Actors on "Acts".contributor_id = Actors.contributor_id
+                                left outer join "Contributor" Directors on "Directs".contributor_id = Directors.contributor_id
+                                where LOWER({queryBy}) like LOWER(\'%{search_field}%\')
+                                group by title, Actors.name,Directors.name, genre_name, release_date, Base.length, mpaa_rating
+                                order by {sortField} {sortOrder};''')
+        
+        result = curs.fetchall()
+        displayResults(result)
+    
+    else:
+        print('Thank you for using our service!')
+
+
+def displayResults(result):
+    print('Title | Actors | Directos | Genre | Length | MPAA Rating | Average Rating')
+    print('-------------------------------------------------------------------------')
+    for res in result:
+        print(res[0], '|', res[1], '|', res[2], '|' , res[3], '|', res[4], '|', res[5], '|', res[6])
+    print('-------------------------------------------------------------------------')

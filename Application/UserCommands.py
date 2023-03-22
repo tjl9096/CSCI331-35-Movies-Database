@@ -49,6 +49,7 @@ def login(curs, conn):
 def logout():
     global currentUser
     currentUser = None
+    print('log out success!')
 
 
 def createAccount(curs, conn):
@@ -88,6 +89,7 @@ def createAccount(curs, conn):
 
     curs.execute(f'INSERT INTO \"User\"(user_id, last_access_date, username, password, first_name, last_name, creation_date) VALUES ({str(currentUser.user_id)}, \'{currentUser.last_access_date}\', \'{currentUser.username}\', \'{currentUser.password}\', \'{currentUser.first_name}\', \'{currentUser.last_name}\', \'{currentUser.creation_date}\')')
     conn.commit()
+    print('create account success!')
 
 
 def searchFriends(curs):
@@ -103,11 +105,11 @@ def searchFriends(curs):
             print('no users with that email found')
         else:
             break
-    print('username | firstname | lastname')
-    print('-------------------------------')
+    print('user_id | username | firstname | lastname')
+    print('-----------------------------------------')
     for res in result:
-        print(res[1], '|', res[2], '|' , res[3])
-    print('-------------------------------')
+        print(res[0], '|', res[1], '|', res[2], '|' , res[3])
+    print('-----------------------------------------')
 
 
 def listFriends(curs):
@@ -161,9 +163,10 @@ def addFriend(curs, conn):
     if(currentUser == None):
         print('Please log in to friend someone')
         return
-    unfriend_id = input('friend id to unfriend: ')
-    curs.execute(f'insert into "Friends" (user_id, friend_id) values (\'{currentUser.user_id}\', \'{unfriend_id}\')')
+    friend_id = input('friend id to friend: ')
+    curs.execute(f'insert into "Friends" (user_id, friend_id) values (\'{currentUser.user_id}\', \'{friend_id}\')')
     conn.commit()
+    print('friend added!')
 
 
 def removeFriend(curs, conn):
@@ -174,6 +177,7 @@ def removeFriend(curs, conn):
     unfriend_id = input('friend id to unfriend: ')
     curs.execute(f'delete from "Friends" WHERE user_id = \'{currentUser.user_id}\' and friend_id = \'{unfriend_id}\'')
     conn.commit()
+    print('friend removed!')
 
 def searchMovie(curs):
     global currentUser

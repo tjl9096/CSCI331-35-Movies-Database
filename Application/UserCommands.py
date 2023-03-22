@@ -241,12 +241,74 @@ def searchMovie(curs):
                             order by title ASC, release_date DESC;''')
     
     result = curs.fetchall()
+    displayResults(result)
 
+    sort = input('Would you like to sort the results? (y/n): ')
+    if sort == 'y':
+        sortField = input('Sort by name, release date, genre or studio \n')
+        sortOrder = input('Sort ascending or descending? (a/d) \n')
+            
+        if sortOrder == 'a':
+            sortOrder = 'ASC'
+        else:
+            sortOrder = 'DESC'
+        
+        if sortField == 'name':
+            sortField = 'title'
+        elif sortField == 'release date':
+            sortField = 'release_date'
+        elif sortField == 'genre':
+            sortField = 'BASE.genre_name'
+        elif sortField == 'studio':
+            sortField = 'Base.platform_name'
+        else:
+            sortField = 'title'
+            
+        if search_by == 'release date':
+            curs.execute(f'''SELECT title as Title, Actors.name as Actors, Directors.name as Directors, genre_name as Genre, Base.length "Length ", mpaa_rating, ROUND(AVG(rating),2)
+                                FROM ("Movie"
+                                    natural join "Hosts_On"
+                                    natural join "Movie_Type"
+                                    natural join "Genre"
+                                    natural join "Release_Platform"
+                                    )
+                                    as BASE
+                                left outer join "Rates" on BASE.movie_id = "Rates".movie_id
+                                left outer join "Directs" on BASE.movie_id = "Directs".movie_id
+                                left outer join "Acts" on BASE.movie_id = "Acts".movie_id
+                                left outer join "Contributor" Actors on "Acts".contributor_id = Actors.contributor_id
+                                left outer join "Contributor" Directors on "Directs".contributor_id = Directors.contributor_id
+                                where {queryBy} = \'{search_field}\'
+                                group by title, Actors.name,Directors.name, genre_name, release_date, Base.length, mpaa_rating
+                                order by {sortField} {sortOrder}''')         
+        else:
+            curs.execute(f'''SELECT title as Title, Actors.name as "Actors", Directors.name as "Directors", genre_name as "Genre", Base.length "Length ", mpaa_rating, ROUND(AVG(rating),2)
+                                FROM ("Movie"
+                                    natural join "Hosts_On"
+                                    natural join "Movie_Type"
+                                    natural join "Genre"
+                                    natural join "Release_Platform"
+                                    )
+                                    as BASE
+                                left outer join "Rates" on BASE.movie_id = "Rates".movie_id
+                                left outer join "Directs" on BASE.movie_id = "Directs".movie_id
+                                left outer join "Acts" on BASE.movie_id = "Acts".movie_id
+                                left outer join "Contributor" Actors on "Acts".contributor_id = Actors.contributor_id
+                                left outer join "Contributor" Directors on "Directs".contributor_id = Directors.contributor_id
+                                where LOWER({queryBy}) like LOWER(\'%{search_field}%\')
+                                group by title, Actors.name,Directors.name, genre_name, release_date, Base.length, mpaa_rating
+                                order by {sortField} {sortOrder};''')
+        
+        result = curs.fetchall()
+        displayResults(result)
+    
+    else:
+        print('Thank you for using our service!')
+
+
+def displayResults(result):
     print('Title | Actors | Directos | Genre | Length | MPAA Rating | Average Rating')
-    print('-----------------------------------------')
+    print('-------------------------------------------------------------------------')
     for res in result:
         print(res[0], '|', res[1], '|', res[2], '|' , res[3], '|', res[4], '|', res[5], '|', res[6])
-    print('-----------------------------------------')
-
-
-
+    print('-------------------------------------------------------------------------')

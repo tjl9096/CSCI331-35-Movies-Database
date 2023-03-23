@@ -139,11 +139,25 @@ Commands:
 
 Requirement: Users can rate a movie (star rating)
 
+Commands:
+            rate_movie
+            #insert any movie_id#
+            5
 
-Requirement: Users can watch a movie individually 
+
+Requirement: Users can watch a movie individually
+
+Commands:
+            watch_movie
+            #insert any movie_id#
 
 
 Requirement: Users can watch/play an entire collection. 
+
+Commands:
+           watch_collection
+           #instert collection_id#
+            
 
 
 Requirement: Users can remove movies from their collections

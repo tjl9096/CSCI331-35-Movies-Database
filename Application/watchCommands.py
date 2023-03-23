@@ -25,6 +25,7 @@ def watchMovie(curs, conn):
 
     curs.execute(f'INSERT INTO \"Watches\"(watch_date, user_id, movie_id) VALUES (\'{today_str}\', {currentUser.user_id}, {movie_to_watch})')
 
+    print("Yay! you watched a movie. Enter the command rate_movie if you would like to rate this movie!")
     conn.commit()
 
 def watchCollection(curs, conn):
@@ -54,10 +55,9 @@ def watchCollection(curs, conn):
 
     today = datetime.now()
     today_str = today.strftime('%Y-%m-%d %H:%M:%S')
-    
-    print (movies_to_watch)
 
     for movie_to_watch in movies_to_watch:
         curs.execute(f'INSERT INTO \"Watches\"(watch_date, user_id, movie_id) VALUES (\'{today_str}\', {currentUser.user_id}, {movie_to_watch})')
 
+    print("Yay! you watched a collection. Enter the command rate_movie if you would like to rate a movie!")
     conn.commit()

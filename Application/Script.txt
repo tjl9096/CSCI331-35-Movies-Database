@@ -58,12 +58,38 @@ Requirement: Users can sort by: movie name, studio, genre, and released
              year. Results can be as-cending and descending.             
 
 Commands:
-            search_movies
+             search_movies
             cast members    # Search by
             lo              # Search term
             y               # Sort?
             genre           # Sort by
             d               # Descending
+
+            search_movies
+            name           # Search by
+            raging bull     # Search term
+            y               # Sort
+            name            # Sort by
+            a               # Ascending
+            
+            search_movies
+            release date    # Search by
+            2006-01-12      # Search term
+            n               # Sort
+            
+            search_movies
+            studio          # Search by
+            HULU            # Search term
+            y               # Sort
+            release year    # Sort by
+            a               # Ascending
+
+            search_movies
+            genre           # Search by
+            Action          # Search term
+            y               # Sort
+            studio          # Sort by
+
 
 Requirement: Users will be able to create collections of movies.
 

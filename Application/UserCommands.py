@@ -248,10 +248,10 @@ def searchMovie(curs):
         sortField = input('Sort by name, release date, genre or studio \n')
         sortOrder = input('Sort ascending or descending? (a/d) \n')
             
-        if sortOrder == 'a':
-            sortOrder = 'ASC'
-        else:
+        if sortOrder == 'd':
             sortOrder = 'DESC'
+        else:
+            sortOrder = 'ASC'
         
         if sortField == 'name':
             sortField = 'title'

@@ -57,6 +57,13 @@ Requirement: Users will be able to search for movies by name, release
 Requirement: Users can sort by: movie name, studio, genre, and released 
              year. Results can be as-cending and descending.             
 
+Commands:
+            search_movies
+            cast members    # Search by
+            lo              # Search term
+            y               # Sort?
+            genre           # Sort by
+            d               # Descending
 
 Requirement: Users will be able to create collections of movies.
 

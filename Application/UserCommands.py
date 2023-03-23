@@ -186,7 +186,6 @@ def searchMovie(curs):
         return
       
     search_by = input('Search a movie by name, release date, cast members, studio, or genre: \n')
-    search_field = input ('Enter the search term: \n')
     queryBy = '' 
 
     match search_by:
@@ -201,8 +200,11 @@ def searchMovie(curs):
         case 'genre':
             queryBy = 'Base.genre_name'
         case _:
-            queryBy = 'title'
+            print('Please select one of the above options')
+            return
 
+    search_field = input ('Enter the search term: \n')
+    
     result = [] 
 
     if search_by == 'release date':
@@ -245,7 +247,7 @@ def searchMovie(curs):
 
     sort = input('Would you like to sort the results? (y/n): ')
     if sort == 'y':
-        sortField = input('Sort by name, release date, genre or studio \n')
+        sortField = input('Sort by name, release year, genre or studio \n')
         sortOrder = input('Sort ascending or descending? (a/d) \n')
             
         if sortOrder == 'd':
@@ -255,7 +257,7 @@ def searchMovie(curs):
         
         if sortField == 'name':
             sortField = 'title'
-        elif sortField == 'release date':
+        elif sortField == 'release year':
             sortField = 'release_date'
         elif sortField == 'genre':
             sortField = 'BASE.genre_name'
@@ -296,18 +298,15 @@ def searchMovie(curs):
                                 left outer join "Contributor" Actors on "Acts".contributor_id = Actors.contributor_id
                                 left outer join "Contributor" Directors on "Directs".contributor_id = Directors.contributor_id
                                 where LOWER({queryBy}) like LOWER(\'%{search_field}%\')
-                                group by title, Actors.name,Directors.name, genre_name, release_date, Base.length, mpaa_rating
+                                group by title, Actors.name,Directors.name, genre_name, release_date, Base.length, mpaa_rating, Base.platform_name
                                 order by {sortField} {sortOrder};''')
         
         result = curs.fetchall()
         displayResults(result)
-    
-    else:
-        print('Thank you for using our service!')
 
 
 def displayResults(result):
-    print('Title | Actors | Directos | Genre | Length | MPAA Rating | Average Rating')
+    print('Title | Actors | Directors | Genre | Length | MPAA Rating | Average Rating')
     print('-------------------------------------------------------------------------')
     for res in result:
         print(res[0], '|', res[1], '|', res[2], '|' , res[3], '|', res[4], '|', res[5], '|', res[6])

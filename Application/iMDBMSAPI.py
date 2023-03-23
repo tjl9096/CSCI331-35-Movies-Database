@@ -203,6 +203,7 @@ def displayCommands():
     print('remove_friend')
     print('get_user')
     print('login')
+    print('logout')
     print('create_account')
     print('search_friends')
     print('create_collection')

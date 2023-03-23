@@ -21,7 +21,7 @@ def watchMovie(curs, conn):
         return
     
     today = datetime.now()
-    today_str = today.strftime('%Y-%m-%d')
+    today_str = today.strftime('%Y-%m-%d %H:%M:%S')
 
     curs.execute(f'INSERT INTO \"Watches\"(watch_date, user_id, movie_id) VALUES (\'{today_str}\', {currentUser.user_id}, {movie_to_watch})')
 
@@ -53,7 +53,7 @@ def watchCollection(curs, conn):
         movies_to_watch.append(str(movie[0]))
 
     today = datetime.now()
-    today_str = today.strftime('%Y-%m-%d')
+    today_str = today.strftime('%Y-%m-%d %H:%M:%S')
     
     for movie_to_watch in movies_to_watch:
         curs.execute(f'INSERT INTO \"Watches\"(watch_date, user_id, movie_id) VALUES (\'{today_str}\', {currentUser.user_id}, {movie_to_watch})')

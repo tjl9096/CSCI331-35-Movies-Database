@@ -13,12 +13,6 @@ f = open('Scripts/.credentials', "r")
 username = f.readline().replace("\n", "")
 password = f.readline()
 
-fake = Faker()
-Dates = {}
-while len(Dates) <= 1000:
-    Dates[fake.date_between(datetime(2022,1,1), datetime(2024,12,31))] = 0
-
-
 try:
     with SSHTunnelForwarder(('starbug.cs.rit.edu', 22),
                             ssh_username=username,
@@ -39,11 +33,13 @@ try:
         curs = conn.cursor()
         print("Database connection established")
 
-        for date_obj in Dates.keys():
-            date = date_obj.strftime("%Y-%m-%d")
-            user_id = random.randint(1, 100)
-            movie_id = random.randint(1, 100)
-            curs.execute(f'INSERT INTO \"Watches\"(watch_date, user_id, movie_id) VALUES {date, user_id, movie_id}')
+        with open("WatchesMockData.csv", "r") as dataFile:
+            next(dataFile)
+            for line in dataFile:
+                watch_date = line
+                user_id = random.randint(1, 100)
+                movie_id = random.randint(1, 100)
+                curs.execute(f'INSERT INTO \"Watches\"(watch_date, user_id, movie_id) VALUES (\'{watch_date}\', {user_id}, {movie_id})')
 
         print("Successful inserted")
         conn.commit()

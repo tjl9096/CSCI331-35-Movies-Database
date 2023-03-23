@@ -81,7 +81,7 @@ Commands:
              list_collections
 
 
-Requirement: Users can add and delete movies from their collection
+Requirement: Users can add and movies to their collection
 
 Commands:
              view_collection
@@ -91,14 +91,14 @@ Commands:
              #insert same collection id#
              #insert valid movie id#
 
+             add_movie_to_collection
+             #insert same collection id#
+             #insert another movie id#
+
              list_collections
 
              view_collection
              #insert same collection id#
-
-             remove_movie_from_collection
-             #insert same collection id#
-             #insert same movie id#
 
 
 Requirement: Users can modify the name of a collection. 
@@ -107,15 +107,6 @@ Commands:
              rename_collection
              #insert same collection id#
              new_name_for_collection
-
-             list_collections
-
-
-Requirement: Users can delete an entire collection
-
-Commands:
-             delete_collection
-             #insert same collection id#
 
              list_collections
 
@@ -129,3 +120,21 @@ Requirement: Users can watch a movie individually
 Requirement: Users can watch/play an entire collection. 
 
 
+Requirement: Users can remove movies from their collections
+
+Commands:
+             remove_movie_from_collection
+             #insert same collection id#
+             #insert same movie id#
+
+             view_collection
+             #insert same collection id#
+
+
+Requirement: Users can delete an entire collection
+
+Commands:
+             delete_collection
+             #insert same collection id#
+
+             list_collections

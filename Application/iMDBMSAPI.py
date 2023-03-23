@@ -11,6 +11,7 @@ from sshtunnel import SSHTunnelForwarder
 from UserCommands import *
 from CollectionCommands import *
 from RatingCommands import *
+from watchCommands import *
 
 
 # connects to the server and runs commands 
@@ -158,6 +159,14 @@ def runCommand(conn, curs):
             rateMovie(curs, conn)
         case 'ratemovie':
             rateMovie(curs, conn)
+        case 'watch_movie':
+            watchMovie(curs, conn)
+        case 'watchmovie':
+            watchMovie(curs, conn)
+        case 'watch_collection':
+            watchCollection(curs, conn)
+        case 'watchcollection':
+            watchCollection(curs, conn)
         case 'list':
             displayCommands()
         case 'help':
@@ -204,6 +213,8 @@ def displayCommands():
     print('add_movie_to_collection')
     print('remove_movie_from_collection')
     print('rate_movie')
+    print('watch_movie')
+    print('watch_collection')
     print('list')
     print('help')
     print('stop')

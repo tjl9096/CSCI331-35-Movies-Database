@@ -1,5 +1,5 @@
 from datetime import date
-import re
+
 class User:
     def __init__(self, user_id, last_access_date, username, password, first_name, last_name, creation_date):
         self.user_id = user_id
@@ -40,7 +40,7 @@ def login(curs, conn):
     currentUser = User(user[0], user[1], user[2], user[3], user[4], user[5], user[6])
     currentUser.last_access_date = date.today()
     
-    curs.execute(f'update \"User\" set last_access_date = \'{currentUser.last_access_date}\' where user_id = \'{currentUser.user_id}\'')
+    curs.execute(f'update \"User\" set last_access_date = current_date where user_id = \'{currentUser.user_id}\'')
     conn.commit()
 
     print('log in success!')
@@ -87,7 +87,7 @@ def createAccount(curs, conn):
     maxId = maxId[0][0]
     currentUser = User(maxId + 1, date.today(), user_username, user_password, user_firstname, user_lastname, date.today())
 
-    curs.execute(f'INSERT INTO \"User\"(user_id, last_access_date, username, password, first_name, last_name, creation_date) VALUES ({str(currentUser.user_id)}, \'{currentUser.last_access_date}\', \'{currentUser.username}\', \'{currentUser.password}\', \'{currentUser.first_name}\', \'{currentUser.last_name}\', \'{currentUser.creation_date}\')')
+    curs.execute(f'INSERT INTO \"User\"(user_id, last_access_date, username, password, first_name, last_name, creation_date) VALUES ((SELECT max(user_id) FROM \"User\")+1, current_date, \'{currentUser.username}\', \'{currentUser.password}\', \'{currentUser.first_name}\', \'{currentUser.last_name}\', current_date)')
     conn.commit()
     print('create account success!')
 

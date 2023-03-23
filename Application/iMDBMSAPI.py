@@ -65,7 +65,7 @@ def main():
 # write your function calls in this function
 def runCommand(conn, curs):
     # read user input
-    input_line = input('iMDBMS command >> ')
+    input_line = input('iMDBMS FROG >> ')
     # split line on spaces 
     split_line = input_line.split(' ')
 

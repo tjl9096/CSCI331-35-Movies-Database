@@ -55,6 +55,8 @@ def watchCollection(curs, conn):
     today = datetime.now()
     today_str = today.strftime('%Y-%m-%d %H:%M:%S')
     
+    print (movies_to_watch)
+
     for movie_to_watch in movies_to_watch:
         curs.execute(f'INSERT INTO \"Watches\"(watch_date, user_id, movie_id) VALUES (\'{today_str}\', {currentUser.user_id}, {movie_to_watch})')
 

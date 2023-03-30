@@ -1,0 +1,5 @@
+Requirement:    Updated security
+
+Commands:       create_user (whole process)
+                show the hashed value in datagrip
+                login with original password

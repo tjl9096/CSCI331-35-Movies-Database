@@ -94,8 +94,9 @@ def deleteCollection(curs, conn):
         print("Use \'list_collections\' to see collections you own")
         return
     
-    curs.execute('DELETE FROM \"Collection\" WHERE user_id = ' + str(currentUser.user_id) + ' AND collection_id = ' + str(collection_id))
     curs.execute('DELETE FROM \"Collection_Contains\" WHERE user_id = ' + str(currentUser.user_id) + ' AND collection_id = ' + str(collection_id))
+    conn.commit()
+    curs.execute('DELETE FROM \"Collection\" WHERE user_id = ' + str(currentUser.user_id) + ' AND collection_id = ' + str(collection_id))
     conn.commit()
 
 def viewCollection(curs):
@@ -115,7 +116,7 @@ def viewCollection(curs):
         print("Use \'list_collections\' to see collections you own")
         return
     
-    curs.execute(f'SELECT movie_id from \"Collection_Contains\" WHERE user_id = ' + str(currentUser.user_id) + ' AND collection_id = ' + str(collection_id))
+    curs.execute(f'SELECT movie_id, title, length, mpaa_rating from \"Movie\" WHERE movie_id in (SELECT movie_id from \"Collection_Contains\" WHERE user_id = ' + str(currentUser.user_id) + ' AND collection_id = ' + str(collection_id) + ')')
     result = curs.fetchall()
 
     if len(result) == 0:
@@ -124,10 +125,8 @@ def viewCollection(curs):
 
     print('Movie ID | Movie Title | Length(in minutes) | MPAA Rating')
 
-    for movie in result:
-        curs.execute('SELECT movie_id, title, length, mpaa_rating from \"Movie\" WHERE movie_id = ' + str(movie[0]))
-        movie_info = curs.fetchall()
-        print(movie_info[0])
+    for movie_info in result:
+        print(movie_info[0], "|", movie_info[1], "|", movie_info[2], "|", movie_info[3])
 
 def addMovieToCollection(curs, conn):
     currentUser = UserCommands.currentUser
@@ -189,3 +188,4 @@ def removeMovieFromCollection(curs, conn):
         return
     
     curs.execute(f'DELETE from \"Collection_Contains\" WHERE user_id = ' + str(currentUser.user_id) + ' AND collection_id = ' + str(collection_id) + ' AND movie_id = ' + str(movie_id))
+    conn.commit()

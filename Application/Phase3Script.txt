@@ -1,0 +1,23 @@
+Requirement: The number of collections the user has
+
+
+Requirement: The number of followers
+
+
+Requirement: The number of following
+
+
+Requirement: Their top 10 movies (by highest rating, most plays, or combination)
+
+
+Requirement: The top 20 most popular movies in the last 90 days (rolling)
+
+
+Requirement: The top 20 most popular movies among my friends
+
+
+Requirement: The top 5 new releases of the month (calendar month)
+
+
+Reqruiement: For you: Recommend movies to watch to based on your play history (e.g. genre,
+cast member, rating) and the play history of similar users

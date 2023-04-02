@@ -36,3 +36,5 @@ Requirement: The top 5 new releases of the month (calendar month)
 
 Reqruiement: For you: Recommend movies to watch to based on your play history (e.g. genre,
 cast member, rating) and the play history of similar users
+
+Commands:    for_me

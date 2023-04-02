@@ -1,4 +1,5 @@
 from datetime import date
+import hashlib
 
 class User:
     def __init__(self, user_id, last_access_date, username, password, first_name, last_name, creation_date):
@@ -26,8 +27,10 @@ def login(curs, conn):
     global currentUser
     user_username = input('username: ')
     user_password = input('password: ')
+    user_password = user_password.encode()
+    hash_user_password = hashlib.sha256(user_password)
 
-    sqlCommand = 'SELECT * FROM \"User\" WHERE username = \'' + str(user_username) + '\' and password = \'' + str(user_password) +'\''
+    sqlCommand = 'SELECT * FROM \"User\" WHERE username = \'' + str(user_username) + '\' and password = \'' + str(hash_user_password.hexdigest()) +'\''
     curs.execute(sqlCommand)
     result = curs.fetchall()
 
@@ -77,6 +80,9 @@ def createAccount(curs, conn):
         else:
             print('passwords did not match, try again.')
 
+    hash_user_password = user_password.encode()
+    hash_user_password = hashlib.sha256(hash_user_password)
+
     user_firstname = input('firstname: ')
     user_firstname = user_firstname.replace(' ', '')
     user_lastname = input('lastname: ')
@@ -85,7 +91,7 @@ def createAccount(curs, conn):
     curs.execute('SELECT max(user_id) FROM \"User\"')
     maxId = curs.fetchall()
     maxId = maxId[0][0]
-    currentUser = User(maxId + 1, date.today(), user_username, user_password, user_firstname, user_lastname, date.today())
+    currentUser = User(maxId + 1, date.today(), user_username, hash_user_password.hexdigest(), user_firstname, user_lastname, date.today())
 
     curs.execute(f'INSERT INTO \"User\"(user_id, last_access_date, username, password, first_name, last_name, creation_date) VALUES ((SELECT max(user_id) FROM \"User\")+1, current_date, \'{currentUser.username}\', \'{currentUser.password}\', \'{currentUser.first_name}\', \'{currentUser.last_name}\', current_date)')
     conn.commit()

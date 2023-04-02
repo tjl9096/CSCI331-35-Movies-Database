@@ -174,6 +174,10 @@ def runCommand(conn, curs):
             rateMovie(curs, conn)
         case 'ratemovie':
             rateMovie(curs, conn)
+        case 'getmytop10':
+            top10Movies(curs)
+        case 'get_my_top_10':
+            top10Movies(curs)
         case 'watch_movie':
             watchMovie(curs, conn)
         case 'watchmovie':
@@ -232,6 +236,7 @@ def displayCommands():
     print('add_movie_to_collection')
     print('remove_movie_from_collection')
     print('rate_movie')
+    print('get_my_top_10')
     print('watch_movie')
     print('watch_collection')
     print('list')

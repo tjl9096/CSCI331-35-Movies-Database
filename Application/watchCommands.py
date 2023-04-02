@@ -32,7 +32,7 @@ def watchCollection(curs, conn):
     currentUser = UserCommands.currentUser
 
     if currentUser == None:
-        print("Please log in to rate a move")
+        print("Please log in to rate a movie")
         return
 
     collection_to_watch = input("Please list the id of the collection you would like to watch: ")
@@ -61,3 +61,23 @@ def watchCollection(curs, conn):
 
     print("Yay! you watched a collection. Enter the command rate_movie if you would like to rate a movie!")
     conn.commit()
+
+def top10Movies(curs):
+    currentUser = UserCommands.currentUser
+
+    if currentUser == None:
+        print("Please log in to get your top 10 movie")
+        return
+
+    curs.execute(f'SELECT movie_id, title, watchcount, avgrating from (SELECT userwatches.movie_id as movie_id, title, userwatches.watchcount, userrates.avgrating from (SELECT movie_id, count(movie_id) as watchcount from "Watches" where user_id = {currentUser.user_id} group by movie_id) as userwatches left join (SELECT movie_id, avg(rating) as avgrating from "Rates" where user_id = {currentUser.user_id} group by movie_id) as userrates on userrates.movie_id = userwatches.movie_id join "Movie" on userwatches.movie_id = "Movie".movie_id) as userwatchesratings order by case when avgrating is null then 0 else avgrating end desc, watchcount desc limit 10;')
+
+    result = curs.fetchall()
+
+    if len(result) == 0:
+        print("You must first watch and rate movies to get your top 10")
+        return
+
+    print('Movie ID | Movie Title | Watch Count | Your average rating')
+
+    for movie_info in result:
+        print(movie_info[0], "|", movie_info[1], "|", movie_info[2], "|", movie_info[3])

@@ -138,6 +138,10 @@ def runCommand(conn, curs):
             listCollections(curs)
         case 'listcollections':
             listCollections(curs)
+        case 'list_total_collections':
+            listTotalCollections(curs)
+        case 'listtotalcollections':
+            listTotalCollections(curs)
         case 'rename_collection':
             renameCollection(curs, conn)
         case 'renamecollection':
@@ -210,6 +214,7 @@ def displayCommands():
     print('create_account')
     print('search_friends')
     print('create_collection')
+    print('list_total_collections')
     print('list_collections')
     print('rename_collection')
     print('delete_collection')

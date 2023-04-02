@@ -99,6 +99,20 @@ def deleteCollection(curs, conn):
     curs.execute('DELETE FROM \"Collection\" WHERE user_id = ' + str(currentUser.user_id) + ' AND collection_id = ' + str(collection_id))
     conn.commit()
 
+
+def listTotalCollections(curs):
+    currentUser = UserCommands.currentUser
+
+    if (currentUser == None):
+            print("Please log in to view a collection")
+            return
+    
+    curs.execute(f'SELECT count(*) from \"Collection\" WHERE user_id = ' + str(currentUser.user_id))
+    result = curs.fetchall()
+
+    print("You have " + str(result[0][0]) + " collections"); 
+    
+
 def viewCollection(curs):
     currentUser = UserCommands.currentUser
 

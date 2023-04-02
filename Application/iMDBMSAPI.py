@@ -186,6 +186,10 @@ def runCommand(conn, curs):
             watchCollection(curs, conn)
         case 'watchcollection':
             watchCollection(curs, conn)
+        case 'forme':
+            forMe(curs)
+        case 'for_me':
+            forMe(curs)
         case 'list':
             displayCommands()
         case 'help':
@@ -239,6 +243,7 @@ def displayCommands():
     print('get_my_top_10')
     print('watch_movie')
     print('watch_collection')
+    print('for_me')
     print('list')
     print('help')
     print('stop')

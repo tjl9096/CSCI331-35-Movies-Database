@@ -22,6 +22,8 @@ Commands:    list_total_friends
 
 Requirement: Their top 10 movies (by highest rating, most plays, or combination)
 
+Commands:    get_my_top_10
+
 
 Requirement: The top 20 most popular movies in the last 90 days (rolling)
 

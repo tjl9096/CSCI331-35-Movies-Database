@@ -81,3 +81,27 @@ def top10Movies(curs):
 
     for movie_info in result:
         print(movie_info[0], "|", movie_info[1], "|", movie_info[2], "|", movie_info[3])
+
+
+def forMe(curs):
+    currentUser = UserCommands.currentUser
+
+    if currentUser == None:
+        print("Please log in to get recommendations")
+        return
+
+    curs.execute(f'select movie_id, title from (select movie_id, count(movie_id) as count from (select user_id from (select u.user_id, (select genre_name from "Watches" natural join "Movie_Type" natural join "Genre" where user_id = u.user_id group by genre_name order by count(genre_name) desc limit 1) as topgenre from "User" u) as uit where topgenre = (select genre_name from "Watches" natural join "Movie_Type" natural join "Genre" where user_id = {currentUser.user_id} group by genre_name order by count(genre_name) desc limit 1) limit 10) as similar_users natural join "Watches" group by movie_id order by count(movie_id) desc) rec_movies natural join "Movie" order by count desc limit 10;')
+
+    result = curs.fetchall()
+
+    if len(result) == 0:
+        print("You must first watch and rate movies to get your top 10")
+        return
+
+    print('Movie ID | Movie Title')
+
+    for movie_info in result:
+        print(movie_info[0], "|", movie_info[1])
+
+
+    

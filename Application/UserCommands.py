@@ -118,6 +118,19 @@ def searchFriends(curs):
     print('-----------------------------------------')
 
 
+def listTotalFriends(curs):
+    global currentUser
+    if(currentUser == None):
+        print('Please log in to view your friends')
+        return
+
+    curs.execute(f'SELECT count(*) from "Friends" WHERE user_id = {currentUser.user_id}')
+
+    result = curs.fetchall()
+
+    print("You have friended " + str(result[0][0]) + " people")
+
+
 def listFriends(curs):
     global currentUser
     if(currentUser == None):
@@ -141,6 +154,19 @@ def listFriends(curs):
     print('-----------------------------------------')
 
 
+def listTotalFriendedMe(curs):
+    global currentUser
+    if(currentUser == None):
+        print('Please log in to view your friends')
+        return
+
+    curs.execute(f'SELECT count(*) from "Friends" WHERE friend_id = {currentUser.user_id}')
+
+    result = curs.fetchall()
+
+    print(str(result[0][0]) + " people have friended you")
+
+
 def listFriendedMe(curs):
     global currentUser
     if(currentUser == None):
@@ -153,7 +179,7 @@ def listFriendedMe(curs):
     result = curs.fetchall()
 
     if(len(result) == 0):
-        print('No one has friended you.')
+        print('No one has friended you')
         return
     
     print('People who have friended you')

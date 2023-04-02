@@ -102,10 +102,18 @@ def runCommand(conn, curs):
             listFriends(curs)
         case 'listfriends':
             listFriends(curs)
+        case 'listtotalfriends':
+            listTotalFriends(curs)
+        case 'list_total_friends':
+            listTotalFriends(curs)
         case 'list_friended_me':
             listFriendedMe(curs)
         case 'listfriendedme':
             listFriendedMe(curs)
+        case 'list_total_friended_me':
+            listTotalFriendedMe(curs)
+        case 'listtotalfriendedme':
+            listTotalFriendedMe(curs)
         case 'add_friend':
             addFriend(curs, conn)
         case 'addfriend':
@@ -204,7 +212,9 @@ def displayCommands():
     displayUsage()
     print('---------- Commands ----------')
     print('list_friended_me')
+    print('list_total_friended_me')
     print('list_friends')
+    print('list_total_friends')
     print('search_friends')
     print('add_friend')
     print('remove_friend')

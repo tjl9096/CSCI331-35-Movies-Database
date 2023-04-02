@@ -8,12 +8,16 @@ Commands:    create_user (whole process)
 Requirement: The number of collections the user has
 
 Commands:    list_total_collections
-  
+
 
 Requirement: The number of followers
 
+Commands:    list_total_friended_me
+
 
 Requirement: The number of following
+
+Commands:    list_total_friends
 
 
 Requirement: Their top 10 movies (by highest rating, most plays, or combination)

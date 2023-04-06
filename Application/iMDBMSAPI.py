@@ -198,6 +198,10 @@ def runCommand(conn, curs):
             top20Recommends(curs)
         case 'top20recommend':
             top20Recommends(curs)
+        case 'top_10_friend_recommend':
+            top10FriendRecommends(curs)
+        case 'top10friendrecommend':
+            top10FriendRecommends(curs)
         case 'list':
             displayCommands()
         case 'help':
@@ -250,6 +254,7 @@ def displayCommands():
     print('rate_movie')
     print('get_my_top_10')
     print('top_20_recommend')
+    print('top_10_friend_recommend')
     print('get_movies_of_the_month')
     print('watch_movie')
     print('watch_collection')

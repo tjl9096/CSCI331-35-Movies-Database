@@ -140,4 +140,53 @@ def top20Recommends(curs):
     print('Sr No | Movie Title')
     for i, movie_info in enumerate(result):
         print(i+1, "|", movie_info[1])
+
+def top10FriendRecommends(curs):
+    currentUser = UserCommands.currentUser
+
+    if currentUser == None:
+        print("Please log in to get recommendations.")
+        return
+
+    sql = "select m.title as title, round(r.avg_rating, 2) as avg_rating, coalesce(p.play_count, 0) as play_count \
+from ( \
+        ( \
+            ( \
+                select movie_id, avg(rating) as avg_rating \
+                from \"Rates\" \
+                where user_id in ( \
+    select friend_id \
+    from \"Friends\" \
+    where user_id = %s) \
+                group by movie_id \
+            ) as r \
+            left join ( \
+                select movie_id, count(movie_id) as play_count \
+                from \"Watches\" \
+                where user_id in ( \
+    select friend_id \
+    from \"Friends\" \
+    where user_id = %s) \
+                group by movie_id \
+            ) as p \
+        on r.movie_id = p.movie_id) \
+        left join ( \
+            select movie_id, title \
+            from \"Movie\" \
+        ) as m \
+        on r.movie_id = m.movie_id) \
+order by avg_rating desc, play_count desc, title asc limit 10;"
+    val = (currentUser.user_id, currentUser.user_id)
+    curs.execute(sql, val)
+
+    result = curs.fetchall()
+
+    if result == []:
+        print("You have no friends.")
+    else:
+        print('Title | Rating | Plays')
+        print('-----------------------------------------')
+        for movie_info in result:
+            print(movie_info[0], "|", movie_info[1], "|", movie_info[2])
+        print('-----------------------------------------')
     

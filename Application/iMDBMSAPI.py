@@ -249,6 +249,7 @@ def displayCommands():
     print('remove_movie_from_collection')
     print('rate_movie')
     print('get_my_top_10')
+    print('top_20_recommend')
     print('get_movies_of_the_month')
     print('watch_movie')
     print('watch_collection')

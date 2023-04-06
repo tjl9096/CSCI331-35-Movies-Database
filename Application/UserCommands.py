@@ -343,3 +343,78 @@ def displayResults(result):
     for res in result:
         print(res[0], '|', res[1], '|', res[2], '|' , res[3], '|', res[4], '|', res[5], '|', res[6])
     print('-------------------------------------------------------------------------')
+
+def top20Recommends(curs):
+    sql = "SELECT friend_id FROM \"Friends\" WHERE user_id = %s"
+    val = currentUser.user_id
+    curs.execute(sql, [val])
+
+    friends = curs.fetchall()
+
+    if friends == []:
+        print("You have no friends.")
+    else:
+        dict = {}
+        for friend_id in friends:
+            sql = "SELECT movie_id, watch_date FROM \"Watches\" WHERE user_id = %s"
+            val = friend_id[0]
+            curs.execute(sql, [val])
+
+            movies_watched = curs.fetchall()
+
+            for movie_id in movies_watched:
+                sql = "SELECT rating FROM \"Rates\" WHERE user_id = %s AND movie_id = %s"
+                val = (friend_id[0], movie_id[0])
+                curs.execute(sql, val)
+                rating = curs.fetchall()
+
+                if rating == []:
+                    continue
+
+                movie_id = movie_id[0]
+                rating = rating[0][0]
+
+                if len(dict) == 0:
+                    dict[movie_id] = [[rating], 1]
+                else:
+                    if movie_id in dict:
+                        list = dict[movie_id]   # get list containing rating list and num_plays
+
+                        list[0].append(rating)
+                        list[1] = list[1] + 1
+                    else:                       # movie id is not in the dictionary
+                        dict[movie_id] = [[rating], 1]
+
+        top_movies = {}
+        title_dict = {}
+        ratings_dict = {}
+        plays_dict = {}
+        for m_id in dict:
+            sql = "SELECT title FROM \"Movie\" WHERE movie_id = %s"
+            val = m_id
+            curs.execute(sql, [val])
+            title = curs.fetchall()[0][0]
+
+            list_ratings = dict[m_id][0]
+
+            rating_avg = 0
+            for r in list_ratings:
+                rating_avg = rating_avg + r
+            rating_avg = rating_avg / (len(list_ratings))
+
+            plays = dict[m_id][1]
+
+            top_movies[m_id] = {'title':title, 'rating':rating_avg, 'plays':plays}
+            title_dict[m_id] = title
+            ratings_dict[m_id] = rating_avg
+            plays_dict[m_id] = plays
+
+        mylist = sorted(top_movies, key = lambda k: (top_movies[k]['rating'], top_movies[k]['plays']), reverse=True)
+        size = 20
+        if len(mylist) < size:
+            size = len(mylist)
+        print('Title | Rating | Plays')
+        print('-----------------------------------------')
+        for x in range(0, size):
+            print(x + 1, '|', title_dict[mylist[x]], '|', ratings_dict[mylist[x]], '|', plays_dict[mylist[x]])
+        print('-----------------------------------------')

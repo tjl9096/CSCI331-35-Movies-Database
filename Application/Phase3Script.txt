@@ -35,6 +35,8 @@ Requirement: The top 20 most popular movies among my friends
 
 Requirement: The top 5 new releases of the month (calendar month)
 
+Commands:    get_movies_of_the_month
+
 
 Reqruiement: For you: Recommend movies to watch to based on your play history (e.g. genre,
 cast member, rating) and the play history of similar users

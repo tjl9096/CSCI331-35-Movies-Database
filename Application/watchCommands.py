@@ -103,5 +103,41 @@ def forMe(curs):
     for movie_info in result:
         print(movie_info[0], "|", movie_info[1])
 
+def top20Recommends(curs):
+    currentUser = UserCommands.currentUser
 
+    if currentUser == None:
+        print("Please log in to get recommendations")
+        return
+
+    curs.execute('''select  *
+                        from
+                        (select userwatches.movie_id as movie_id, title, userwatches.watchcount as total, userrates.avgrating
+                            from
+                                (select movie_id, count(movie_id) as watchcount
+                                    from "Watches"
+                                    where watch_date >= CURRENT_DATE - INTERVAL '90 days'
+                                    group by movie_id) as userwatches
+                                left join
+
+                                (select movie_id, avg(rating) as avgrating
+                                    from "Rates"
+                                    where date >= CURRENT_DATE - INTERVAL '90 days'
+                                    group by movie_id) as userrates
+
+                                on userrates.movie_id = userwatches.movie_id
+
+                                join
+
+                                "Movie" on userwatches.movie_id = "Movie".movie_id
+                            ) as userwatchesratings
+                        group by userwatchesratings.movie_id, userwatchesratings.title, userwatchesratings.avgrating, userwatchesratings.total
+                        order by total desc, coalesce(avgrating) desc limit 20;
+                        ''')
+
+    result = curs.fetchall()
+
+    print('Sr No | Movie Title')
+    for i, movie_info in enumerate(result):
+        print(i+1, "|", movie_info[1])
     

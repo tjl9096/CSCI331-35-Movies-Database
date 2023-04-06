@@ -190,6 +190,10 @@ def runCommand(conn, curs):
             forMe(curs)
         case 'for_me':
             forMe(curs)
+        case 'top_20_recommend':
+            top20Recommends(curs)
+        case 'top20recommend':
+            top20Recommends(curs)
         case 'list':
             displayCommands()
         case 'help':

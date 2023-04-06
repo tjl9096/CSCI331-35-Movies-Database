@@ -141,7 +141,7 @@ def top20Recommends(curs):
     for i, movie_info in enumerate(result):
         print(i+1, "|", movie_info[1])
 
-def top10FriendRecommends(curs):
+def top20FriendRecommends(curs):
     currentUser = UserCommands.currentUser
 
     if currentUser == None:
@@ -175,7 +175,7 @@ from ( \
             from \"Movie\" \
         ) as m \
         on r.movie_id = m.movie_id) \
-order by avg_rating desc, play_count desc, title asc limit 10;"
+order by avg_rating desc, play_count desc, title asc limit 20;"
     val = (currentUser.user_id, currentUser.user_id)
     curs.execute(sql, val)
 
